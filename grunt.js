@@ -10,7 +10,7 @@ module.exports = function (grunt) {
 		},
 		jslint: {
 			files: [ // some example files
-				'grunt.js', 'tasks/**/*.js'
+				'grunt.js', 'tasks/jslint.js'
 			]
 		},
 		jslint_options: { // some example JSLint directives
