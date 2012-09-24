@@ -1,0 +1,3 @@
+[submodule "tasks/JSLint"]
+	path = tasks/JSLint
+	url = git://github.com/douglascrockford/JSLint.git
