@@ -1,0 +1,40 @@
+{
+  "name": "grunt-jslint",
+  "description": "Validates JavaScript files with JSLint",
+  "version": "0.1.0",
+  "homepage": "https://github.com/stephenmathieson/grunt-jslint",
+  "author": {
+    "name": "Stephen Mathieson",
+    "email": "me@stephenmathieson.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/stephenmathieson/grunt-jslint.git"
+  },
+  "bugs": {
+    "url": "https://github.com/stephenmathieson/grunt-jslint/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/stephenmathieson/grunt-jslint/blob/master/LICENSE-MIT"
+    }
+  ],
+  "main": "grunt.js",
+  "bin": "bin/grunt-jslint",
+  "engines": {
+    "node": "*"
+  },
+  "scripts": {
+    "test": "grunt test"
+  },
+  "dependencies": {
+    "grunt": "~0.3.11"
+  },
+  "devDependencies": {
+    "grunt": "~0.3.11"
+  },
+  "keywords": [
+    "gruntplugin"
+  ]
+}
