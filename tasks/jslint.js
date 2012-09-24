@@ -41,7 +41,7 @@ module.exports = function (grunt) {
 				grunt.log.writeln(errors.length.toString().red + ' JSLint violations in ' + filepath.yellow);
 
 				errors.forEach(function (lintError) {
-					if (lintError !== null) {
+					if (lintError !== undefined) {
 						var message,
 							reason = lintError.reason;
 
