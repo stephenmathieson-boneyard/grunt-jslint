@@ -18,7 +18,7 @@ module.exports = function (grunt) {
 		fs = require('fs'),
 		ctx = vm.createContext();
 
-	vm.runInContext(fs.readFileSync(__dirname + '/lib/jslint.js'), ctx);
+	vm.runInContext(fs.readFileSync(__dirname + '/JSLint/jslint.js'), ctx);
 
 	jslint = ctx.JSLINT;
 
