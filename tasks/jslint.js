@@ -28,24 +28,33 @@ module.exports = function (grunt) {
 			files = grunt.file.expandFiles(this.file.src),
 			fileCount = files.length;
 
-		files.forEach(function (filepath) {
-			var source = grunt.file.read(filepath);
+		files.forEach(function (filepath, foo) {
+			var source = grunt.file.read(filepath),
+				passed = jslint(source, options),
+				data = jslint.data(),
+				errors = [];
 
-			if (!jslint(source, options)) {
+			if (!passed || (data.unused && data.unused.length)) {
+				errors = errors.concat(jslint.errors);
+				errors = errors.concat(data.unused);
 
-				grunt.log.writeln(jslint.errors.length.toString().red + ' JSLint violations in `' + filepath.yellow + '`');
+				grunt.log.writeln(errors.length.toString().red + ' JSLint violations in ' + filepath.yellow);
 
-				jslint.errors.forEach(function (lintError) {
-
+				errors.forEach(function (lintError) {
 					if (lintError !== null) {
-						var message = 'Error on line ' + (lintError.line || 'unknown').toString();
-						message += ', character ' + (lintError.character || '').toString();
-						message += ': ' + (lintError.reason || '').red;
+						var message,
+							reason = lintError.reason;
 
+						if (reason === undefined) {
+							reason = 'Unused variable `' + lintError.name + '`';
+						}
+
+						message = 'Error on line #';
+						message += lintError.line.toString();
+						message += ': ' + reason;
 						grunt.log.error(message);
 					}
 				});
-
 			}
 
 		});

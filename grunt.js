@@ -15,7 +15,8 @@ module.exports = function (grunt) {
 		},
 		jslint_options: { // some example JSLint directives
 			browser: true,
-			vars: false
+			vars: false,
+			unparam: true
 		}
 	});
 
