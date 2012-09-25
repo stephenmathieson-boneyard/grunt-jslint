@@ -1,0 +1,7 @@
+<%= errors.length.toString().red %> JSLint violations in <%= filepath.yellow %>
+<% for (var i = 0, l = errors.length; i < l; i++) {
+	print('Error on line #' + errors[i].line.toString());
+	errors[i].character ? print(', character #' + errors[i].character) : '';
+	errors[i].reason ? print(': ' + errors[i].reason) : print(': Unused variable `' + errors[i].name + '`');
+	print("\n");
+} %>

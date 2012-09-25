@@ -13,23 +13,16 @@
 module.exports = function (grunt) {
 	'use strict';
 
-	var jslint, templateString, template,
+	var jslint, template, templateString,
 		vm = require('vm'),
 		fs = require('fs'),
 		ctx = vm.createContext();
 
-	templateString =  "<%= errors.length.toString().red %> JSLint violations in <%= filepath.yellow %>\n";
-	templateString += "<% for (var i = 0, l = errors.length; i < l; i++) { %>";
-	templateString += "<% if (errors[i]) { %>";
+	function isUndefined(element) {
+		return element !== undefined && element !== null;
+	}
 
-	templateString += "Error on line #";
-	templateString += "<%= errors[i].line.toString() %>";
-
-	templateString += "<% errors[i].character ? print(', character #' + errors[i].character) : '' %>";
-	templateString += "<% errors[i].reason ? print(':' + errors[i].reason) : print(': Unused variable `' + errors[i].name + '`') %>";
-	templateString += "\n";
-	templateString += "<% } %>";
-	templateString += "<% } %>";
+	templateString = grunt.file.read(__dirname + '/templates/standard.tmpl');
 
 
 	vm.runInContext(fs.readFileSync(__dirname + '/JSLint/jslint.js'), ctx);
@@ -52,6 +45,7 @@ module.exports = function (grunt) {
 			if (!passed || (data.unused && data.unused.length)) {
 				errors = errors.concat(jslint.errors);
 				errors = errors.concat(data.unused);
+				errors = errors.filter(isUndefined);
 
 				errorCount += errors.length;
 				template = grunt.utils._.template(templateString);
