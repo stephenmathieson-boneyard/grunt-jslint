@@ -13,10 +13,17 @@
 module.exports = function (grunt) {
 	'use strict';
 
-	var jslint,
+	var jslint, template, templateString,
 		vm = require('vm'),
 		fs = require('fs'),
 		ctx = vm.createContext();
+
+	function isUndefined(element) {
+		return element !== undefined && element !== null;
+	}
+
+	templateString = grunt.file.read(__dirname + '/templates/standard.tmpl');
+
 
 	vm.runInContext(fs.readFileSync(__dirname + '/JSLint/jslint.js'), ctx);
 
@@ -26,7 +33,8 @@ module.exports = function (grunt) {
 
 		var options = grunt.config('jslint_options') || {},
 			files = grunt.file.expandFiles(this.file.src),
-			fileCount = files.length;
+			fileCount = files.length,
+			errorCount = 0;
 
 		files.forEach(function (filepath, foo) {
 			var source = grunt.file.read(filepath),
@@ -37,30 +45,20 @@ module.exports = function (grunt) {
 			if (!passed || (data.unused && data.unused.length)) {
 				errors = errors.concat(jslint.errors);
 				errors = errors.concat(data.unused);
+				errors = errors.filter(isUndefined);
 
-				grunt.log.writeln(errors.length.toString().red + ' JSLint violations in ' + filepath.yellow);
-
-				errors.forEach(function (lintError) {
-					if (lintError !== undefined && lintError !== null) {
-						var message,
-							reason = lintError.reason;
-
-						if (reason === undefined) {
-							reason = 'Unused variable `' + lintError.name + '`';
-						}
-
-						message = 'Error on line #';
-						message += lintError.line.toString();
-						message += ': ' + reason;
-						grunt.log.error(message);
-					}
-				});
+				errorCount += errors.length;
+				template = grunt.utils._.template(templateString);
+				grunt.log.write(template({
+					errors: errors,
+					filepath: filepath
+				}));
 			}
 
 		});
 
-		if (this.errorCount) {
-			grunt.log.writeln(this.errorCount.toString().red + ' JSLint violations in ' + fileCount.toString().yellow + ' files');
+		if (errorCount) {
+			grunt.log.writeln(errorCount.toString().red + ' JSLint violations in ' + fileCount.toString().yellow + ' files');
 			return false;
 		}
 	});
