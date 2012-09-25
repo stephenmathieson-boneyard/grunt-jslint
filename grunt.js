@@ -20,7 +20,8 @@ module.exports = function (grunt) {
 			unused: true // pseudo-directive, will report unused variables
 		},
 		jslint_options: {
-			junit: './out/junit.xml'
+			junit: 'out/junit.xml',
+			log: 'out/lint.log'
 		}
 	});
 

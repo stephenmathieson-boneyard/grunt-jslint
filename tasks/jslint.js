@@ -51,7 +51,6 @@ module.exports = function (grunt) {
 				data = jslint.data(),
 				errors = [];
 
-
 			errors = errors.concat(jslint.errors);
 			if (!directives.unused) {
 				errors = errors.concat(data.unused);
@@ -70,14 +69,20 @@ module.exports = function (grunt) {
 
 		report.failures = errorCount;
 
-		template = grunt.utils._.template(templateString);
-		grunt.log.write(template(report));
+		template = grunt.template.process(templateString, report);
+
+		grunt.log.write(template);
+
+		if (options.log) {
+			grunt.file.write(options.log, grunt.log.uncolor(template));
+		}
 
 		if (options.junit) {
 
 			jUnitTemplate = grunt.file.read(__dirname + '/templates/junit.tmpl');
-			template = grunt.utils._.template(jUnitTemplate);
-			grunt.file.write(options.junit || 'junit.xml', template(report));
+			template = grunt.template.process(jUnitTemplate, report);
+
+			grunt.file.write(options.junit, template);
 		}
 
 		if (errorCount) {
