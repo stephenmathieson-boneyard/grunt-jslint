@@ -3,7 +3,7 @@
  * https://github.com/stephenmathieson/grunt-jslint
  *
  * Copyright (c) 2012 Stephen Mathieson
- * Licensed under the MIT license.
+ * Licensed under the WTFPL license.
  */
 
 /*jslint node:true*/

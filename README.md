@@ -9,4 +9,4 @@ _(Nothing yet)_
 
 ## License
 Copyright (c) 2012 Stephen Mathieson
-Licensed under the MIT license.
+Licensed under the WTFPL license.
