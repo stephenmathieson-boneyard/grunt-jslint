@@ -18,8 +18,13 @@ module.exports = function (grunt) {
 		fs = require('fs'),
 		ctx = vm.createContext();
 
-	function isUndefined(element) {
-		return element !== undefined && element !== null;
+	/**
+	 * Checks to see if a thing is neither undefired nor null
+	 * @param  {Mixed|Any}  thing The thing to check
+	 * @return {Boolean}          True if the thing is either null or undefined
+	 */
+	function isDefined(thing) {
+		return thing !== undefined && thing !== null;
 	}
 
 	templateString = grunt.file.read(__dirname + '/templates/standard.tmpl');
@@ -45,7 +50,7 @@ module.exports = function (grunt) {
 			if (!passed || (data.unused && data.unused.length)) {
 				errors = errors.concat(jslint.errors);
 				errors = errors.concat(data.unused);
-				errors = errors.filter(isUndefined);
+				errors = errors.filter(isDefined);
 
 				errorCount += errors.length;
 				template = grunt.utils._.template(templateString);
