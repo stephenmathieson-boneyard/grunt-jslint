@@ -1,7 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuites>
-	<% for (var i = 0, l = errors.length; i < l; i++) { %>
-		<testsuite>
-		</testsuite>
-	<% } %>
+	<testsuite>
+		<% obj.files.forEach(function(file) { %>
+			<testcase name="<%= file.filepath %>">
+				<% file.errors.forEach(function(error, index) { %>
+					<failure message=<%
+
+						print('"* Error on line #' + error.line.toString());
+						error.character ? print(', character #' + error.character) : '';
+						error.reason ? print(': ' + error.reason) : print(': Unused variable `' + error.name + '`');
+						print('"');
+					%> />
+				<% }); %>
+			</testcase>
+		<% }); %>
+	</testsuite>
 </testsuites>

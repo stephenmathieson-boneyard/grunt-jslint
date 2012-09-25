@@ -13,7 +13,7 @@
 module.exports = function (grunt) {
 	'use strict';
 
-	var jslint, template, templateString,
+	var jslint, template, templateString, jUnitTemplate,
 		vm = require('vm'),
 		fs = require('fs'),
 		ctx = vm.createContext();
@@ -36,36 +36,54 @@ module.exports = function (grunt) {
 
 	grunt.registerMultiTask('jslint', 'Validates JavaScript files with JSLint', function () {
 
-		var options = grunt.config('jslint_options') || {},
+		var directives = grunt.config('jslint_directives') || {},
+			options = grunt.config('jslint_options') || {},
 			files = grunt.file.expandFiles(this.file.src),
 			fileCount = files.length,
-			errorCount = 0;
+			errorCount = 0,
+			report = {
+				files: []
+			};
 
-		files.forEach(function (filepath, foo) {
+		files.forEach(function (filepath, index) {
 			var source = grunt.file.read(filepath),
-				passed = jslint(source, options),
+				passed = jslint(source, directives),
 				data = jslint.data(),
 				errors = [];
 
-			if (!passed || (data.unused && data.unused.length)) {
-				errors = errors.concat(jslint.errors);
-				errors = errors.concat(data.unused);
-				errors = errors.filter(isDefined);
 
-				errorCount += errors.length;
-				template = grunt.utils._.template(templateString);
-				grunt.log.write(template({
-					errors: errors,
-					filepath: filepath
-				}));
+			errors = errors.concat(jslint.errors);
+			if (!directives.unused) {
+				errors = errors.concat(data.unused);
 			}
+			errors = errors.filter(isDefined);
+
+			errorCount += errors.length;
+
+			report.files[index] = {
+				filepath: filepath,
+				passed: passed,
+				errors: errors
+			};
 
 		});
 
+		report.failures = errorCount;
+
+		template = grunt.utils._.template(templateString);
+		grunt.log.write(template(report));
+
+		if (options.junit) {
+
+			jUnitTemplate = grunt.file.read(__dirname + '/templates/junit.tmpl');
+			template = grunt.utils._.template(jUnitTemplate);
+			grunt.file.write(options.junit || 'junit.xml', template(report));
+		}
+
 		if (errorCount) {
-			grunt.log.writeln(errorCount.toString().red + ' JSLint violations in ' + fileCount.toString().yellow + ' files');
 			return false;
 		}
+
 	});
 
 };

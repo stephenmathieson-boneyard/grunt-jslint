@@ -1,7 +1,17 @@
-<%= errors.length.toString().red %> JSLint violations in <%= filepath.yellow %>
-<% for (var i = 0, l = errors.length; i < l; i++) {
-	print('Error on line #' + errors[i].line.toString());
-	errors[i].character ? print(', character #' + errors[i].character) : '';
-	errors[i].reason ? print(': ' + errors[i].reason) : print(': Unused variable `' + errors[i].name + '`');
-	print("\n");
+<% obj.files.forEach(function(file) {
+	if (file.errors.length) {
+		print(file.errors.length.toString().red + '	JSLint violations in ' + file.filepath.yellow + '\n');
+	} else {
+		print('No JSLint violations in '.green + file.filepath.yellow + '\n');
+	}
+	file.errors.forEach(function(error, index) {
+		print('* Error on line #' + error.line.toString());
+		error.character ? print(', character #' + error.character) : '';
+		error.reason ? print(': ' + error.reason) : print(': Unused variable `' + error.name + '`');
+		print('\n');
+	});
+});
+if (obj.failures) {
+	var failures = obj.failures.toString() + ' total JSLint violations.\n';
+	print (failures.red);
 } %>
