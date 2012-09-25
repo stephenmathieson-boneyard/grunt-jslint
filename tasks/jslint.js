@@ -13,10 +13,24 @@
 module.exports = function (grunt) {
 	'use strict';
 
-	var jslint,
+	var jslint, templateString, template,
 		vm = require('vm'),
 		fs = require('fs'),
 		ctx = vm.createContext();
+
+	templateString =  "<%= errors.length.toString().red %> JSLint violations in <%= filepath.yellow %>\n";
+	templateString += "<% for (var i = 0, l = errors.length; i < l; i++) { %>";
+	templateString += "<% if (errors[i]) { %>";
+
+	templateString += "Error on line #";
+	templateString += "<%= errors[i].line.toString() %>";
+
+	templateString += "<% errors[i].character ? print(', character #' + errors[i].character) : '' %>";
+	templateString += "<% errors[i].reason ? print(':' + errors[i].reason) : print(': Unused variable `' + errors[i].name + '`') %>";
+	templateString += "\n";
+	templateString += "<% } %>";
+	templateString += "<% } %>";
+
 
 	vm.runInContext(fs.readFileSync(__dirname + '/JSLint/jslint.js'), ctx);
 
@@ -26,7 +40,8 @@ module.exports = function (grunt) {
 
 		var options = grunt.config('jslint_options') || {},
 			files = grunt.file.expandFiles(this.file.src),
-			fileCount = files.length;
+			fileCount = files.length,
+			errorCount = 0;
 
 		files.forEach(function (filepath, foo) {
 			var source = grunt.file.read(filepath),
@@ -38,29 +53,18 @@ module.exports = function (grunt) {
 				errors = errors.concat(jslint.errors);
 				errors = errors.concat(data.unused);
 
-				grunt.log.writeln(errors.length.toString().red + ' JSLint violations in ' + filepath.yellow);
-
-				errors.forEach(function (lintError) {
-					if (lintError !== undefined) {
-						var message,
-							reason = lintError.reason;
-
-						if (reason === undefined) {
-							reason = 'Unused variable `' + lintError.name + '`';
-						}
-
-						message = 'Error on line #';
-						message += lintError.line.toString();
-						message += ': ' + reason;
-						grunt.log.error(message);
-					}
-				});
+				errorCount += errors.length;
+				template = grunt.utils._.template(templateString);
+				grunt.log.write(template({
+					errors: errors,
+					filepath: filepath
+				}));
 			}
 
 		});
 
-		if (this.errorCount) {
-			grunt.log.writeln(this.errorCount.toString().red + ' JSLint violations in ' + fileCount.toString().yellow + ' files');
+		if (errorCount) {
+			grunt.log.writeln(errorCount.toString().red + ' JSLint violations in ' + fileCount.toString().yellow + ' files');
 			return false;
 		}
 	});
