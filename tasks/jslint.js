@@ -41,6 +41,7 @@ module.exports = function (grunt) {
 			options = grunt.config('jslint_options') || {},
 			files = grunt.file.expandFiles(this.file.src),
 			fileCount = files.length,
+			filesInViolation = 0,
 			errorCount = 0,
 			report = {
 				files: []
@@ -66,8 +67,10 @@ module.exports = function (grunt) {
 			}
 			errors = errors.filter(isDefined);
 
-			errorCount += errors.length;
-
+			if (errors.length) {
+				errorCount += errors.length;
+				filesInViolation += 1;
+			}
 			report.files[index] = {
 				filepath: filepath,
 				passed: passed,
@@ -77,6 +80,7 @@ module.exports = function (grunt) {
 		});
 
 		report.failures = errorCount;
+		report.filesInViolation = filesInViolation;
 
 		template = grunt.template.process(templateString, report);
 
