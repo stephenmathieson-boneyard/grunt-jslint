@@ -36,7 +36,8 @@ module.exports = function (grunt) {
 
 	grunt.registerMultiTask('jslint', 'Validates JavaScript files with JSLint', function () {
 
-		var directives = grunt.config('jslint_directives') || {},
+		var exclude = [],
+			directives = grunt.config('jslint_directives') || {},
 			options = grunt.config('jslint_options') || {},
 			files = grunt.file.expandFiles(this.file.src),
 			fileCount = files.length,
@@ -45,11 +46,19 @@ module.exports = function (grunt) {
 				files: []
 			};
 
+		if (options.exclude) {
+			exclude = grunt.file.expandFiles(options.exclude);
+		}
+
 		files.forEach(function (filepath, index) {
 			var source = grunt.file.read(filepath),
 				passed = jslint(source, directives),
 				data = jslint.data(),
 				errors = [];
+
+			if (exclude.indexOf(filepath) !== -1) {
+				return;
+			}
 
 			errors = errors.concat(jslint.errors);
 			if (!directives.unused) {
