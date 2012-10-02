@@ -4,29 +4,36 @@ module.exports = function (grunt) {
 
 	// Project configuration.
 	grunt.initConfig({
+
 		watch: {
 			files: '<config:jslint.files>',
 			tasks: 'default'
 		},
+
 		jslint: {
 			files: [ // some example files
-				'**/*.js'
+				'grunt.js',
+				'tasks/jslint.js'
 			]
 		},
+
 		jslint_directives: { // some example JSLint directives
 			browser: true,
 			vars: false,
 			unparam: true,
-			unused: true // pseudo-directive, will report unused variables
+			unused: false // pseudo-directive, will report unused variables
 		},
+
 		jslint_options: {
 			junit: 'out/junit.xml',
-			log: 'out/lint.log'
+			log: 'out/lint.log',
+			errorsOnly: true
 		}
+
 	});
 
 	// Load local tasks.
-	grunt.loadTasks('tasks');
+	grunt.loadTasks('./tasks');
 
 	// Default task.
 	grunt.registerTask('default', 'jslint');
