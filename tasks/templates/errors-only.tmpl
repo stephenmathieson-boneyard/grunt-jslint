@@ -1,0 +1,21 @@
+<%
+	obj.files.forEach(function(file) {
+
+		if (file.errors.length) {
+			print('FAIL\t'.red);
+			print(file.filepath);
+			print('(' + file.errors.length + ')\n');
+		}
+
+		file.errors.forEach(function(error, index) {
+			print((file.filepath + ':' + error.line).red);
+			print((error.character ? ':' + error.character : '').red + '\t');
+			print(error.reason ? error.reason : 'Unused variable `' + error.name + '`');
+			print('\n');
+		});
+	});
+
+	if (obj.failures) {
+		print(('\n# JSLint failed, ' + obj.failures.toString() + ' violations in ' + obj.filesInViolation + ' files.  ' + obj.files.length + ' files scanned.\n').red);
+	}
+%>
