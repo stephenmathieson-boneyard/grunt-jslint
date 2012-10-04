@@ -87,7 +87,7 @@ module.exports = function (grunt) {
 
 	});
 
-	grunt.registerTask('default', 'server watch');
+	grunt.registerTask('default', 'watch');
 };
 ```
 
