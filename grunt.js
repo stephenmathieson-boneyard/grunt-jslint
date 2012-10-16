@@ -14,20 +14,19 @@ module.exports = function (grunt) {
 			files: [ // some example files
 				'grunt.js',
 				'tasks/jslint.js'
-			]
-		},
+			],
+			directives: { // some example JSLint directives
+				browser: true,
+				vars: false,
+				unparam: true,
+				unused: false // pseudo-directive, will report unused variables
+			},
+			options: {
+				junit: 'out/junit.xml',
+				log: 'out/lint.log',
+				errorsOnly: false
 
-		jslint_directives: { // some example JSLint directives
-			browser: true,
-			vars: false,
-			unparam: true,
-			unused: false // pseudo-directive, will report unused variables
-		},
-
-		jslint_options: {
-			junit: 'out/junit.xml',
-			log: 'out/lint.log',
-			errorsOnly: true
+			}
 		}
 
 	});
