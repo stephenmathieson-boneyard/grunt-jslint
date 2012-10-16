@@ -9,14 +9,35 @@
 /*jslint node:true*/
 /*jslint nomen:true*/
 
-module.exports = function (grunt) {
+var jslint,
+	vm = require('vm'),
+	fs = require('fs'),
+	ctx = vm.createContext();
 
+/*jslint stupid:true*/
+vm.runInContext(fs.readFileSync('/Users/stephenmathieson/work/grunt-jslint/tasks/JSLint/jslint.js'), ctx);
+/*jslint stupid:false*/
+
+jslint = ctx.JSLINT;
+
+module.exports = function (grunt) {
 	'use strict';
 
-	var jslint, template, templateStandard, jUnitTemplate, templateOnlyErrors,
-		vm = require('vm'),
-		fs = require('fs'),
-		ctx = vm.createContext();
+	var templates = {};
+
+	templates.standard = grunt.file.read('/Users/stephenmathieson/work/grunt-jslint/tasks/templates/standard.tmpl');
+	templates.errors_only = grunt.file.read('/Users/stephenmathieson/work/grunt-jslint/tasks/templates/errors-only.tmpl');
+	templates.junit = grunt.file.read('/Users/stephenmathieson/work/grunt-jslint/tasks/templates/junit.tmpl');
+
+	/**
+	 * Grabs a config option from the jslint namespace
+	 *
+	 * @param  {String} option The option/configuration key
+	 * @return {Mixed|Any}     The key's value
+	 */
+	function conf(option) {
+		return grunt.config('jslint.' + option);
+	}
 
 	/**
 	 * Checks to see if a thing is neither undefired nor null
@@ -28,41 +49,37 @@ module.exports = function (grunt) {
 		return thing !== undefined && thing !== null;
 	}
 
-	/*jslint nomen:true, stupid:true*/
-	templateStandard = grunt.file.read(__dirname + '/templates/standard.tmpl');
-	templateOnlyErrors = grunt.file.read(__dirname + '/templates/errors-only.tmpl');
-	jUnitTemplate = grunt.file.read(__dirname + '/templates/junit.tmpl');
+	grunt.registerTask('jslint', 'Your task description goes here.', function () {
 
-	vm.runInContext(fs.readFileSync(__dirname + '/JSLint/jslint.js'), ctx);
-	/*jslint nomen:false, stupid:false*/
-
-	jslint = ctx.JSLINT;
-
-	grunt.registerMultiTask('jslint', 'Validates JavaScript files with JSLint', function () {
-
-		var exclude = [],
-			directives = grunt.config('jslint_directives') || {},
-			options = grunt.config('jslint_options') || {},
-			files = grunt.file.expandFiles(this.file.src),
+		var template,
+			files = conf('files'),
+			excludedFiles = conf('exclude') || [],
+			options = conf('options') || {},
+			directives = conf('directives') || {},
 			filesInViolation = 0,
 			errorCount = 0,
 			report = {
 				files: []
 			};
 
-		if (options.exclude) {
-			exclude = grunt.file.expandFiles(options.exclude);
+		if (!files) {
+			grunt.log.error('NO FILES?!?');
+			return false;
 		}
 
+		excludedFiles = grunt.file.expandFiles(excludedFiles);
+
+		files = grunt.file.expandFiles(files).filter(function (file) {
+			return excludedFiles.indexOf(file) === -1;
+		});
+
 		files.forEach(function (filepath, index) {
+
 			var source = grunt.file.read(filepath),
 				passed = jslint(source, directives),
 				data = jslint.data(),
 				errors = [];
 
-			if (exclude.indexOf(filepath) !== -1) {
-				return;
-			}
 
 			errors = errors.concat(jslint.errors);
 			if (!directives.unused) {
@@ -87,13 +104,9 @@ module.exports = function (grunt) {
 		report.filesInViolation = filesInViolation;
 
 		if (options.errorsOnly) {
-
-			template = grunt.template.process(templateOnlyErrors, report);
-
+			template = grunt.template.process(templates.errors_only, report);
 		} else {
-
-			template = grunt.template.process(templateStandard, report);
-
+			template = grunt.template.process(templates.standard, report);
 		}
 
 		grunt.log.write(template);
@@ -103,7 +116,7 @@ module.exports = function (grunt) {
 		}
 
 		if (options.junit) {
-			template = grunt.template.process(jUnitTemplate, report);
+			template = grunt.template.process(templates.junit, report);
 
 			grunt.file.write(options.junit, template);
 		}
