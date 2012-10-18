@@ -15,7 +15,7 @@ var jslint,
 	ctx = vm.createContext();
 
 /*jslint stupid:true*/
-vm.runInContext(fs.readFileSync('/Users/stephenmathieson/work/grunt-jslint/tasks/JSLint/jslint.js'), ctx);
+vm.runInContext(fs.readFileSync(__dirname + '/JSLint/jslint.js'), ctx);
 /*jslint stupid:false*/
 
 jslint = ctx.JSLINT;
@@ -25,9 +25,9 @@ module.exports = function (grunt) {
 
 	var templates = {};
 
-	templates.standard = grunt.file.read('/Users/stephenmathieson/work/grunt-jslint/tasks/templates/standard.tmpl');
-	templates.errors_only = grunt.file.read('/Users/stephenmathieson/work/grunt-jslint/tasks/templates/errors-only.tmpl');
-	templates.junit = grunt.file.read('/Users/stephenmathieson/work/grunt-jslint/tasks/templates/junit.tmpl');
+	templates.standard = grunt.file.read(__dirname + '/templates/standard.tmpl');
+	templates.errors_only = grunt.file.read(__dirname + '/templates/errors-only.tmpl');
+	templates.junit = grunt.file.read(__dirname + '/templates/junit.tmpl');
 
 	/**
 	 * Grabs a config option from the jslint namespace
