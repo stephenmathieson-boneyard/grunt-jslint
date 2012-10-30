@@ -28,7 +28,7 @@ module.exports = function (grunt) {
 	templates.standard = grunt.file.read(__dirname + '/templates/standard.tmpl');
 	templates.errors_only = grunt.file.read(__dirname + '/templates/errors-only.tmpl');
 	templates.junit = grunt.file.read(__dirname + '/templates/junit.tmpl');
-	JSLintXMLTemplate = grunt.file.read(__dirname + '/templates/jslint-xml.tmpl');
+	JSLintXMLTemplate = grunt.file.read(__dirname + '/templates/jslintXML.tmpl');
 
 	/**
 	 * Grabs a config option from the jslint namespace
