@@ -23,7 +23,7 @@ module.exports = function (grunt) {
 			},
 			options: {
 				junit: 'out/junit.xml',
-				jslintXML: 'out/jslintXML.xml',
+				jslintXml: 'out/jslint_xml.xml',
 				log: 'out/lint.log',
 				errorsOnly: false
 
