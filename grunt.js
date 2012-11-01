@@ -10,10 +10,15 @@ module.exports = function (grunt) {
 			tasks: 'default'
 		},
 
+		test: {
+			files: ['test/**/*.js']
+		},
+
 		jslint: {
 			files: [ // some example files
 				'grunt.js',
-				'tasks/jslint.js'
+				'tasks/jslint.js',
+				'test/**/*.js'
 			],
 			directives: { // some example JSLint directives
 				browser: true,
