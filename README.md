@@ -73,8 +73,6 @@ module.exports = function (grunt) {
 			tasks: 'jslint'
 		},
 
-		// TAKE NOTE - this has changed since 0.1.8
-
 		jslint: { // configure the task
 			files: [ // some example files
 				'grunt.js',
@@ -108,6 +106,7 @@ module.exports = function (grunt) {
 
 
 ## Release History
+* 0.2.1 - Added JSLint XML output for [Jenkins Violations Plugin](https://wiki.jenkins-ci.org/display/JENKINS/Violations)
 * 0.2.0 - Cleaned up your `grunt.js` file for you - moved all options into the `jslint` object
 * 0.1.8 - Updating README.md to contain more verbose documentation, adding keywords to package.json
 * 0.1.7 - Added an option to only report on errors
