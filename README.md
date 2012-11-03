@@ -48,7 +48,9 @@ Supports the following options:
 			<li>
 				<b>junit</b> - A String/filepath option which, when provided, tells the plugin where to write a JUnit-style XML file to.
 			</li>
-
+			<li>
+				<b>jslintXml</b> - A String/filepath option which, when provided, tells the plugin where to write a JSLint-style XML file to.
+			</li>
 		</ul>
 
 	</li>
