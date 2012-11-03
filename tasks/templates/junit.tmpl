@@ -3,12 +3,12 @@
 	<testsuite>
 		<% obj.files.forEach(function(file) { %>
 			<testcase name="<%= file.filepath %>">
-				<% file.errors.forEach(function(error, index) { %>
+				<% file.encodedErrors.forEach(function(error, index) { %>
 					<failure message="<%
 						print(error.line + ':');
 						print(error.character ? error.character + ':' : '');
 						print(' ');
-						print(error.reason ? error.reason.replace(/"/g, '&quot;') : 'Unused variable `' + error.name + '`');
+						print(error.reason ? error.reason : 'Unused variable `' + error.name + '`');
 					%>" />
 				<% }); %>
 			</testcase>

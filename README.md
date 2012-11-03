@@ -48,7 +48,9 @@ Supports the following options:
 			<li>
 				<b>junit</b> - A String/filepath option which, when provided, tells the plugin where to write a JUnit-style XML file to.
 			</li>
-
+			<li>
+				<b>jslintXml</b> - A String/filepath option which, when provided, tells the plugin where to write a JSLint-style XML file to.
+			</li>
 		</ul>
 
 	</li>
@@ -93,6 +95,7 @@ module.exports = function (grunt) {
 			options: {
 				junit: 'out/junit.xml', // write the output to a JUnit XML
 				log: 'out/lint.log',
+				jslintXml: 'out/jslint_xml.xml',
 				errorsOnly: true // only display errors
 			}
 		}
