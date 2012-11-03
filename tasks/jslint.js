@@ -12,6 +12,8 @@
 var jslint,
 	vm = require('vm'),
 	fs = require('fs'),
+	entities = require('entities'),
+	clone = require('clone'),
 	ctx = vm.createContext();
 
 /*jslint stupid:true*/
@@ -28,6 +30,7 @@ module.exports = function (grunt) {
 	templates.standard = grunt.file.read(__dirname + '/templates/standard.tmpl');
 	templates.errors_only = grunt.file.read(__dirname + '/templates/errors-only.tmpl');
 	templates.junit = grunt.file.read(__dirname + '/templates/junit.tmpl');
+	templates.jslint_xml = grunt.file.read(__dirname + '/templates/jslint-xml.tmpl');
 
 	/**
 	 * Grabs a config option from the jslint namespace
@@ -78,7 +81,8 @@ module.exports = function (grunt) {
 			var source = grunt.file.read(filepath),
 				passed = jslint(source, directives),
 				data = jslint.data(),
-				errors = [];
+				errors = [],
+				encodedErrors = [];
 
 
 			errors = errors.concat(jslint.errors);
@@ -90,12 +94,23 @@ module.exports = function (grunt) {
 			if (errors.length) {
 				errorCount += errors.length;
 				filesInViolation += 1;
+
+				errors.forEach(function (error) {
+					var encodedError = clone(error),
+						evidence = error.evidence,
+						reason = error.reason;
+
+					encodedError.evidence = evidence ? entities.encode(evidence, 0) : evidence;
+					encodedError.reason = reason ? entities.encode(reason, 0) : reason;
+					encodedErrors.push(encodedError);
+				});
 			}
 
 			report.files[index] = {
 				filepath: filepath,
 				passed: passed,
-				errors: errors
+				errors: errors,
+				encodedErrors: encodedErrors
 			};
 
 		});
@@ -119,6 +134,12 @@ module.exports = function (grunt) {
 			template = grunt.template.process(templates.junit, report);
 
 			grunt.file.write(options.junit, template);
+		}
+
+		if (options.jslintXml) {
+			template = grunt.template.process(templates.jslint_xml, report);
+
+			grunt.file.write(options.jslintXml, template);
 		}
 
 		if (errorCount) {
