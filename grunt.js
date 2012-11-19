@@ -30,8 +30,8 @@ module.exports = function (grunt) {
 				junit: 'out/junit.xml',
 				jslintXml: 'out/jslint_xml.xml',
 				log: 'out/lint.log',
-				errorsOnly: false
-
+				errorsOnly: false,
+				failOnError: true // default
 			}
 		}
 

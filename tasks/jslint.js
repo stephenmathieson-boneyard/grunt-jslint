@@ -9,23 +9,21 @@
 /*jslint node:true*/
 /*jslint nomen:true*/
 
-var jslint,
-	vm = require('vm'),
-	fs = require('fs'),
-	entities = require('entities'),
-	clone = require('clone'),
-	ctx = vm.createContext();
-
-/*jslint stupid:true*/
-vm.runInContext(fs.readFileSync(__dirname + '/JSLint/jslint.js'), ctx);
-/*jslint stupid:false*/
-
-jslint = ctx.JSLINT;
+var vm = require('vm');
+var fs = require('fs');
+var entities = require('entities');
+var clone = require('clone');
+var ctx = vm.createContext();
 
 module.exports = function (grunt) {
 	'use strict';
 
-	var templates = {};
+	var jslint,
+		templates = {};
+
+	vm.runInContext(grunt.file.read(__dirname + '/JSLint/jslint.js'), ctx);
+
+	jslint = ctx.JSLINT;
 
 	templates.standard = grunt.file.read(__dirname + '/templates/standard.tmpl');
 	templates.errors_only = grunt.file.read(__dirname + '/templates/errors-only.tmpl');
@@ -52,7 +50,10 @@ module.exports = function (grunt) {
 		return thing !== undefined && thing !== null;
 	}
 
-	grunt.registerTask('jslint', 'Your task description goes here.', function () {
+	/**
+	 * The task
+	 */
+	grunt.registerTask('jslint', 'Validate JavaScript files with JSLint', function () {
 
 		var template,
 			files = conf('files'),
@@ -68,6 +69,10 @@ module.exports = function (grunt) {
 		if (!files) {
 			grunt.log.error('NO FILES?!?');
 			return false;
+		}
+
+		if (options.failOnError === undefined) {
+			options.failOnError = true;
 		}
 
 		excludedFiles = grunt.file.expandFiles(excludedFiles);
@@ -142,7 +147,7 @@ module.exports = function (grunt) {
 			grunt.file.write(options.jslintXml, template);
 		}
 
-		if (errorCount) {
+		if (errorCount && options.failOnError) {
 			return false;
 		}
 

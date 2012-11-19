@@ -51,6 +51,9 @@ Supports the following options:
 			<li>
 				<b>jslintXml</b> - A String/filepath option which, when provided, tells the plugin where to write a JSLint-style XML file to.
 			</li>
+			<li>
+				<b>failOnError</b> - A Boolean option - defaults to <code>true</code>; when set to <code>false</code>, grunt will not fail if JSLint detects an error.
+			</li>
 		</ul>
 
 	</li>
@@ -94,7 +97,8 @@ module.exports = function (grunt) {
 				junit: 'out/junit.xml', // write the output to a JUnit XML
 				log: 'out/lint.log',
 				jslintXml: 'out/jslint_xml.xml',
-				errorsOnly: true // only display errors
+				errorsOnly: true, // only display errors
+				failOnError: false // defaults to true
 			}
 		}
 
@@ -106,6 +110,7 @@ module.exports = function (grunt) {
 
 
 ## Release History
+# 0.2.2 - Adding option to not cause Grunt to fail if a violation is detected
 * 0.2.1 - Added JSLint XML output for [Jenkins Violations Plugin](https://github.com/jenkinsci/violations-plugin)
 * 0.2.0 - Cleaned up your `grunt.js` file for you - moved all options into the `jslint` object
 * 0.1.8 - Updating README.md to contain more verbose documentation, adding keywords to package.json
