@@ -110,7 +110,7 @@ module.exports = function (grunt) {
 
 
 ## Release History
-# 0.2.2 - Adding option to not cause Grunt to fail if a violation is detected
+* 0.2.2 - Adding option to not cause Grunt to fail if a violation is detected
 * 0.2.1 - Added JSLint XML output for [Jenkins Violations Plugin](https://github.com/jenkinsci/violations-plugin)
 * 0.2.0 - Cleaned up your `grunt.js` file for you - moved all options into the `jslint` object
 * 0.1.8 - Updating README.md to contain more verbose documentation, adding keywords to package.json
