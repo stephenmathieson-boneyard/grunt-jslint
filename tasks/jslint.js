@@ -122,11 +122,12 @@ module.exports = function (grunt) {
 
 		report.failures = errorCount;
 		report.filesInViolation = filesInViolation;
+		options.data = report;
 
 		if (options.errorsOnly) {
-			template = grunt.template.process(templates.errors_only, report);
+			template = grunt.template.process(templates.errors_only, options);
 		} else {
-			template = grunt.template.process(templates.standard, report);
+			template = grunt.template.process(templates.standard, options);
 		}
 
 		grunt.log.write(template);
@@ -136,13 +137,13 @@ module.exports = function (grunt) {
 		}
 
 		if (options.junit) {
-			template = grunt.template.process(templates.junit, report);
+			template = grunt.template.process(templates.junit, options);
 
 			grunt.file.write(options.junit, template);
 		}
 
 		if (options.jslintXml) {
-			template = grunt.template.process(templates.jslint_xml, report);
+			template = grunt.template.process(templates.jslint_xml, options);
 
 			grunt.file.write(options.jslintXml, template);
 		}
