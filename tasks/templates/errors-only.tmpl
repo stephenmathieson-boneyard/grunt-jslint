@@ -1,5 +1,5 @@
 <%
-	obj.files.forEach(function(file) {
+	report.files.forEach(function(file) {
 
 		if (file.errors.length) {
 			print('FAIL\t'.red);
@@ -15,7 +15,7 @@
 		});
 	});
 
-	if (obj.failures) {
-		print(('\n# JSLint failed, ' + obj.failures.toString() + ' violations in ' + obj.filesInViolation + ' files.  ' + obj.files.length + ' files scanned.\n').red);
+	if (report.failures) {
+		print(('\n# JSLint failed, ' + report.failures.toString() + ' violations in ' + report.filesInViolation + ' files.  ' + report.files.length + ' files scanned.\n').red);
 	}
 %>

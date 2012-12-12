@@ -110,6 +110,7 @@ module.exports = function (grunt) {
 
 
 ## Release History
+* 0.2.3 - Adding support for Grunt *0.4.x* by using [underscore's templating engine](http://underscorejs.org/#template), rather than Grunt's version of it.  Also updated JSLint to edition **2012-12-04**
 * 0.2.2-1 - Updating JSLint to "edition" **2012-11-17**
 * 0.2.2 - Adding option to not cause Grunt to fail if a violation is detected
 * 0.2.1 - Added JSLint XML output for [Jenkins Violations Plugin](https://github.com/jenkinsci/violations-plugin)

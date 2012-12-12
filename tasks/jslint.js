@@ -13,6 +13,8 @@ var vm = require('vm');
 var fs = require('fs');
 var entities = require('entities');
 var clone = require('clone');
+var underscore = require('underscore');
+
 var ctx = vm.createContext();
 
 module.exports = function (grunt) {
@@ -27,7 +29,7 @@ module.exports = function (grunt) {
 
 	templates.standard = grunt.file.read(__dirname + '/templates/standard.tmpl');
 	templates.errors_only = grunt.file.read(__dirname + '/templates/errors-only.tmpl');
-	templates.junit = grunt.file.read(__dirname + '/templates/junit.tmpl');
+	templates.junit = grunt.file.read(__dirname + '/templates/junit-xml.tmpl');
 	templates.jslint_xml = grunt.file.read(__dirname + '/templates/jslint-xml.tmpl');
 
 	/**
@@ -124,9 +126,13 @@ module.exports = function (grunt) {
 		report.filesInViolation = filesInViolation;
 
 		if (options.errorsOnly) {
-			template = grunt.template.process(templates.errors_only, report);
+			template = underscore.template(templates.errors_only, {
+				'report': report
+			});
 		} else {
-			template = grunt.template.process(templates.standard, report);
+			template = grunt.template.process(templates.standard, {
+				'report': report
+			});
 		}
 
 		grunt.log.write(template);
@@ -136,13 +142,17 @@ module.exports = function (grunt) {
 		}
 
 		if (options.junit) {
-			template = grunt.template.process(templates.junit, report);
+			template = grunt.template.process(templates.junit, {
+				'report': report
+			});
 
 			grunt.file.write(options.junit, template);
 		}
 
 		if (options.jslintXml) {
-			template = grunt.template.process(templates.jslint_xml, report);
+			template = grunt.template.process(templates.jslint_xml, {
+				'report': report
+			});
 
 			grunt.file.write(options.jslintXml, template);
 		}
