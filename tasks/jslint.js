@@ -130,7 +130,7 @@ module.exports = function (grunt) {
 				'report': report
 			});
 		} else {
-			template = grunt.template.process(templates.standard, {
+			template = underscore.template(templates.standard, {
 				'report': report
 			});
 		}
@@ -142,7 +142,7 @@ module.exports = function (grunt) {
 		}
 
 		if (options.junit) {
-			template = grunt.template.process(templates.junit, {
+			template = underscore.template(templates.junit, {
 				'report': report
 			});
 
@@ -150,7 +150,7 @@ module.exports = function (grunt) {
 		}
 
 		if (options.jslintXml) {
-			template = grunt.template.process(templates.jslint_xml, {
+			template = underscore.template(templates.jslint_xml, {
 				'report': report
 			});
 
