@@ -90,8 +90,9 @@ module.exports = function (grunt) {
 				data = jslint.data(),
 				errors = [],
 				encodedErrors = [],
-				classname = filepath.replace(/\//g, '.').replace(/ /g, '-').replace(/.js$/, ''),
-				testname = filepath.replace(/.*\/([^\/]+.js)/, '$1');
+				filepathParts = underscore.compact(filepath.split(/[\\\//]/)),
+				classname = filepathParts.join('.').replace(/\.js$/, ''),
+				filename = underscore.last(filepathParts);
 
 			errors = errors.concat(jslint.errors);
 			if (!directives.unused) {
@@ -110,7 +111,7 @@ module.exports = function (grunt) {
 
 					encodedError.evidence = evidence ? entities.encode(evidence, 0) : evidence;
 					encodedError.reason = reason ? entities.encode(reason, 0) : reason;
-					encodedError.id = testname + ':' + error.line + ':' + (error.character || '');
+					encodedError.id = filename + ':' + error.line + ':' + (error.character || '');
 					encodedErrors.push(encodedError);
 				});
 			}
@@ -118,7 +119,7 @@ module.exports = function (grunt) {
 			report.files[index] = {
 				filepath: filepath,
 				classname: classname,
-				testname: testname,
+				filename: filename,
 				passed: passed,
 				errors: errors,
 				encodedErrors: encodedErrors

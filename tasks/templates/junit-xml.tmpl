@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuites>
 	<testsuite><%
-		 report.files.forEach(function(file) {
+		report.files.forEach(function(file) {
 			file.encodedErrors.forEach(function(error, index) {
-			%>
-			<testcase classname="<%= file.classname %>" name="<%= error.id %>">
-				<failure message="<%
+				%>
+				<testcase classname="<%= file.classname %>" name="<%= error.id %>">
+					<failure message="<%
 						print(error.line + ':');
 						print(error.character ? error.character + ':' : '');
 						print(' ');
 						print(error.reason ? error.reason : 'Unused variable `' + error.name + '`');
 					%>" />
-			</testcase><%
+				</testcase><%
 			});
 		}); 
-	%></testsuite>
+	%>
+	</testsuite>
 </testsuites>
