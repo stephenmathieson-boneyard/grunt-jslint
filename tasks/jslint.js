@@ -89,8 +89,10 @@ module.exports = function (grunt) {
 				passed = jslint(source, directives),
 				data = jslint.data(),
 				errors = [],
-				encodedErrors = [];
-
+				encodedErrors = [],
+				filepathParts = underscore.compact(filepath.split(/[\\\//]/)),
+				classname = filepathParts.join('.').replace(/\.js$/i, ''),
+				filename = underscore.last(filepathParts);
 
 			errors = errors.concat(jslint.errors);
 			if (!directives.unused) {
@@ -109,12 +111,15 @@ module.exports = function (grunt) {
 
 					encodedError.evidence = evidence ? entities.encode(evidence, 0) : evidence;
 					encodedError.reason = reason ? entities.encode(reason, 0) : reason;
+					encodedError.id = filename + ':' + error.line + ':' + (error.character || '');
 					encodedErrors.push(encodedError);
 				});
 			}
 
 			report.files[index] = {
 				filepath: filepath,
+				classname: classname,
+				filename: filename,
 				passed: passed,
 				errors: errors,
 				encodedErrors: encodedErrors
