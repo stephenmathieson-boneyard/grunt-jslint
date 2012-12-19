@@ -91,7 +91,7 @@ module.exports = function (grunt) {
 				errors = [],
 				encodedErrors = [],
 				filepathParts = underscore.compact(filepath.split(/[\\\//]/)),
-				classname = filepathParts.join('.').replace(/\.js$/, ''),
+				classname = filepathParts.join('.').replace(/\.js$/i, ''),
 				filename = underscore.last(filepathParts);
 
 			errors = errors.concat(jslint.errors);
