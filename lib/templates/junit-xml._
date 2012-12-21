@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuites>
 	<testsuite>
-		<% report.forEach(function (testCase) { %>
-			<testcase name="<%= testCase.name %>">
-				<% testCase.failures.forEach(function (failure) { %>
-					<failure message="<%= failure %>" />
-				<%}); %>
-			</testcase>
-		<% }); %>
+		<% report.forEach(function (testCase) { 
+			testCase.failures.forEach(function (failure) { %>
+				<testcase classname="<%= testCase.classname %>" name="<%= failure.id %>">
+					<failure message="<%= failure.message %>" />
+				</testcase>
+			<% });
+		}); %>
 	</testsuite>
 </testsuites>
