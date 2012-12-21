@@ -2,6 +2,8 @@
 module.exports = function (grunt) {
 	'use strict';
 
+	grunt.loadNpmTasks('grunt-vows');
+
 	// Project configuration.
 	grunt.initConfig({
 
@@ -17,14 +19,13 @@ module.exports = function (grunt) {
 		jslint: {
 			files: [ // some example files
 				'grunt.js',
+				'lib/**/*.js',
 				'tasks/jslint.js',
-				'test/**/*.js'
+				'test/*.js'
 			],
 			directives: { // some example JSLint directives
-				browser: true,
-				vars: false,
-				unparam: true,
-				unused: false // pseudo-directive, will report unused variables
+				unused: true, // pseudo-directive, will report unused variables
+				todo: true
 			},
 			options: {
 				junit: 'out/junit.xml',
@@ -32,6 +33,15 @@ module.exports = function (grunt) {
 				log: 'out/lint.log',
 				errorsOnly: false,
 				failOnError: true // default
+			}
+		},
+
+		vows: {
+			all: {
+				files: [
+					'test/*.js'
+				],
+				reporter: 'spec'
 			}
 		}
 
