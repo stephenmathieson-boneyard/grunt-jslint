@@ -33,7 +33,7 @@
 		"colors": "~0.6.0-1"
 	},
 	"devDependencies": {
-		"grunt-vows": "~0.2.1"
+		"vows": "0.6.x"
 	},
 	"keywords": [
 		"gruntplugin",

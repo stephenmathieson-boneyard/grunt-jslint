@@ -108,6 +108,10 @@ module.exports = function (grunt) {
 };
 ```
 
+## Running the Tests
+
+Open your terminal and type `./test.sh`.  If anything fails, you did it wrong.
+
 
 ## Release History
 * 0.2.4 - Refactor everything, allowing for a test suite to be created

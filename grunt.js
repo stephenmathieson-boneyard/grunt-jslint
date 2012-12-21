@@ -2,8 +2,6 @@
 module.exports = function (grunt) {
 	'use strict';
 
-	grunt.loadNpmTasks('grunt-vows');
-
 	// Project configuration.
 	grunt.initConfig({
 
@@ -33,15 +31,6 @@ module.exports = function (grunt) {
 				log: 'out/lint.log',
 				errorsOnly: false,
 				failOnError: true // default
-			}
-		},
-
-		vows: {
-			all: {
-				files: [
-					'test/*.js'
-				],
-				reporter: 'spec'
 			}
 		}
 
