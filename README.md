@@ -110,7 +110,8 @@ module.exports = function (grunt) {
 
 
 ## Release History
-* 0.2.3-1 Fix for bad template processing; thanks to @sbrandwoo
+* 0.2.4 - Refactor everything, allowing for a test suite to be created
+* 0.2.3-1 - Fix for bad template processing; thanks to @sbrandwoo
 * 0.2.3 - Adding support for Grunt *0.4.x* by using [underscore's templating engine](http://underscorejs.org/#template), rather than Grunt's version of it.  Also updated JSLint to edition **2012-12-04**
 * 0.2.2-1 - Updating JSLint to "edition" **2012-11-17**
 * 0.2.2 - Adding option to not cause Grunt to fail if a violation is detected
