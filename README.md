@@ -108,13 +108,25 @@ module.exports = function (grunt) {
 };
 ```
 
-## Running the Tests
+## Contributing
 
-Open your terminal and type `./test.sh`.  If anything fails, you did it wrong.
+All files should be validated with JSLint.  Bug fixes and/or new features must be accompanied by a passing test.  Tests are written with [vows](http://vowsjs.org/).
 
+### Validating coding style
+
+Run `grunt jslint` in the root of your repository.
+
+### Running the tests
+
+Run `./test.sh` in the root of your repository.
+
+## TODOs
+
+- better test coverage
+- test-runner for Windows
 
 ## Release History
-* 0.2.4 - Refactor everything, allowing for a test suite to be created
+* 0.2.4 - Re-factor everything, allowing for a test suite to be created.  Updated the outputted JUnit-style XML for better intergration with Jenkins per @sbrandwoo.
 * 0.2.3-1 - Fix for bad template processing; thanks to @sbrandwoo
 * 0.2.3 - Adding support for Grunt *0.4.x* by using [underscore's templating engine](http://underscorejs.org/#template), rather than Grunt's version of it.  Also updated JSLint to edition **2012-12-04**
 * 0.2.2-1 - Updating JSLint to "edition" **2012-11-17**
