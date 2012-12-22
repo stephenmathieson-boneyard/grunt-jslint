@@ -26,14 +26,11 @@
 		"node": "*"
 	},
 	"dependencies": {
-		"grunt": "~0.3.11",
-		"entities": "~0.1.1",
-		"clone": "~0.1.1",
-		"underscore": "1.4.x",
+		"grunt": "*",
 		"colors": "~0.6.0-1"
 	},
 	"devDependencies": {
-		"vows": "0.6.x"
+		"vows": "0.7.x"
 	},
 	"keywords": [
 		"gruntplugin",
