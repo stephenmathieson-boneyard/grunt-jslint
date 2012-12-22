@@ -2,11 +2,16 @@
 <testsuites>
 	<testsuite>
 		<% report.forEach(function (testCase) { %>
-			<testcase name="<%= testCase.name %>">
+			<% if (testCase.failures.length) { %>
 				<% testCase.failures.forEach(function (failure) { %>
-					<failure message="<%= failure %>" />
-				<%}); %>
-			</testcase>
+					<testcase classname="<%= testCase.classname %>" name="<%= failure.id %>">
+						<failure message="<%= failure.message %>" />
+					</testcase>
+				<% }); %>
+			<% } else { %>
+				<testcase classname="<%= testCase.classname %>" name="<%= testCase.filename %>">
+				</testcase>
+			<% } %>
 		<% }); %>
 	</testsuite>
 </testsuites>
