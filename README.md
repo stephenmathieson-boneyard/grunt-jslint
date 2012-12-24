@@ -52,6 +52,9 @@ Supports the following options:
 				<b>jslintXml</b> - A String/filepath option which, when provided, tells the plugin where to write a JSLint-style XML file to.
 			</li>
 			<li>
+				<b>checkstyle</b> - A String/filepath option which, when provided, tells the plugin where to write a CheckStyle-XML file to.
+			</li>
+			<li>
 				<b>failOnError</b> - A Boolean option - defaults to <code>true</code>; when set to <code>false</code>, grunt will not fail if JSLint detects an error.
 			</li>
 		</ul>
