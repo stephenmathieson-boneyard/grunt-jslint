@@ -5,7 +5,7 @@ Validates JavaScript files with [JSLint](https://github.com/douglascrockford/JSL
 ## Installation
 Install this grunt plugin next to your project's [grunt.js gruntfile][getting_started] with: `npm install grunt-jslint`
 
-Then add this line to your project's `grunt.js` gruntfile:
+Then add this line to your project's gruntfile:
 
 ```javascript
 grunt.loadNpmTasks('grunt-jslint');
