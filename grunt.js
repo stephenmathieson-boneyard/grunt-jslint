@@ -30,6 +30,7 @@ module.exports = function (grunt) {
 				jslintXml: 'out/jslint_xml.xml',
 				log: 'out/lint.log',
 				errorsOnly: false,
+				checkstyle: 'out/checkstyle.xml',
 				failOnError: true // default
 			}
 		}
