@@ -98,6 +98,7 @@ module.exports = function (grunt) {
 				log: 'out/lint.log',
 				jslintXml: 'out/jslint_xml.xml',
 				errorsOnly: true, // only display errors
+				checkstyle: 'out/checkstyle.xml', // write a checkstyle-XML
 				failOnError: false // defaults to true
 			}
 		}
@@ -126,6 +127,7 @@ Run `./test.sh` in the root of your repository.
 - test-runner for Windows
 
 ## Release History
+* 0.2.5 - Adding checkstyle-compatible XML reporter
 * 0.2.4 - Re-factor everything, allowing for a test suite to be created.  Updated the outputted JUnit-style XML for better intergration with Jenkins per @sbrandwoo.  Remove unecessary dependencies.
 * 0.2.3-1 - Fix for bad template processing; thanks to @sbrandwoo
 * 0.2.3 - Adding support for Grunt *0.4.x* by using [underscore's templating engine](http://underscorejs.org/#template), rather than Grunt's version of it.  Also updated JSLint to edition **2012-12-04**
