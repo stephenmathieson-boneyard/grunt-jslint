@@ -5,10 +5,10 @@
 			<% file.issues.forEach(function (issue) { %>
 				<error
 					line="<%= issue.line %>"
-					column="<%= issue.character ? issue.character : '' %>"
-					severity="warning"
-					message="<%= issue.reason ? issue.reason : 'Unused variable `' + issue.name + '`' %>"
-					source="com.jslint.foo" />
+					column="<%= issue.character %>"
+					severity="<%=  issue.severity %>"
+					message="<%= issue.message %>"
+					source="<%= issue.source %>" />
 			<% }); %>
 		</file>
 	<% }); %>
