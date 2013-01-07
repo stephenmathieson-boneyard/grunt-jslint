@@ -55,7 +55,6 @@ module.exports = function (grunt) {
 
 		options.directives = directives;
 
-
 		runner(files, options, function (err, report) {
 
 			var template;
