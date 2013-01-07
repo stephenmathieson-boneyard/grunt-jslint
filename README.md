@@ -36,7 +36,7 @@ Supports the following options:
 	</li>
 
 	<li>
-		<b>Options</b> - Configuration options/settings for the plugin itself.  Currently supports the following:
+		<b>options</b> - Configuration options/settings for the plugin itself.  Currently supports the following:
 
 		<ul>
 			<li>
