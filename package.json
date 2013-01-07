@@ -29,7 +29,8 @@
 		"grunt": "*"
 	},
 	"devDependencies": {
-		"vows": "0.7.x"
+		"vows": "*",
+		"xml2js": "*"
 	},
 	"keywords": [
 		"gruntplugin",
