@@ -28,6 +28,7 @@ var suite = vows.describe('reporters');
 //
 // TODO
 // - much better coverage
+// - reduce code repetition
 //
 
 suite.addBatch({
@@ -114,12 +115,6 @@ suite.addBatch({
 		}
 	},
 	'outputted xml:': {
-		//
-		//
-		// TODO lots of code repetition...
-		//
-		//
-		//
 		'checkstyle': {
 			topic: function () {
 				var parser = new Parser(),
@@ -225,7 +220,7 @@ suite.addBatch({
 				topic: function (xml) {
 					return xml.testsuites.testsuite[0].testcase;
 				},
-				// should start with a letter (not a '.' dot)
+				// should start with a letter (not a dot)
 				// should strip '.js'
 				// should do this stuff too:
 				// http://docs.oracle.com/javase/tutorial/java/package/namingpkgs.html
@@ -252,7 +247,7 @@ suite.addBatch({
 
 						assert.includes(name, ':');
 
-						// test name is  <filename>:<line>:<char>
+						// test name is  `<filename>:<line>:<char>`
 						assert.match(name, /^[a-z]+\.js\:\d\:[\d]+$/i);
 					});
 				},
