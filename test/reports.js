@@ -46,6 +46,27 @@ suite.addBatch({
 			assert.isString(result);
 		}
 	},
+	'checkstyle': {
+		topic: function () {
+			var callback = this.callback,
+				files = [
+					path.join(ROOT, 'fixtures', 'sloppy.js'),
+					path.join(ROOT, 'fixtures', 'white.js'),
+					path.join(ROOT, 'fixtures', 'shebang')
+				];
+
+			runner(files, {}, function (err, report) {
+				callback(err, reports.checkstyle(report));
+			});
+		},
+		'should not have errored': function (err, result) {
+			assert.ifError(err);
+		},
+		// extremely low coverage here...
+		'should return a String': function (err, result) {
+			assert.isString(result);
+		}
+	},
 	'junit-xml': {
 		topic: function () {
 			var callback = this.callback,

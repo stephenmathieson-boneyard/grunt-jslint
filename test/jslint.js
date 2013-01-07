@@ -50,12 +50,14 @@ suite.addBatch({
 			assert.ok(report.length > 10);
 		}
 	},
-	'directives': {
+	'directives:': {
 		'white': {
 			topic: function () {
 				var file = path.join(ROOT, 'fixtures', 'white.js');
 				validate(file, {
-					'white': true
+					'directives': {
+						'white': true
+					}
 				}, this.callback);
 			},
 			'should not error': function (err, report) {
@@ -70,7 +72,9 @@ suite.addBatch({
 			topic: function () {
 				var file = path.join(ROOT, 'fixtures', 'sloppy.js');
 				validate(file, {
-					'sloppy': true
+					'directives': {
+						'sloppy': true
+					}
 				}, this.callback);
 			},
 			'should not error': function (err, report) {
@@ -80,6 +84,19 @@ suite.addBatch({
 				assert.isArray(report);
 				assert.lengthOf(report, 0);
 			}
+		}
+	},
+	'shebang option': {
+		topic: function () {
+			var file = path.join(ROOT, 'fixtures', 'shebang');
+			validate(file, { shebang: true }, this.callback);
+		},
+		'should not error': function (err, report) {
+			assert.ifError(err);
+		},
+		'should pass an empty Array': function (err, report) {
+			assert.isArray(report);
+			assert.lengthOf(report, 0);
 		}
 	},
 	'missing file': {
