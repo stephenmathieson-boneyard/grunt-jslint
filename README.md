@@ -55,7 +55,7 @@ Supports the following options:
 				<b>failOnError</b> - A Boolean option - defaults to <code>true</code>; when set to <code>false</code>, grunt will not fail if JSLint detects an error.
 			</li>
 			<li>
-				<b>shebang</b> - Remove shebang lines (`#!/usr/bin/whatever`) from files before linting them
+				<b>shebang</b> - Ignore shebang lines (`#!/usr/bin/whatever`) from files
 			</li>
 		</ul>
 
@@ -101,7 +101,8 @@ module.exports = function (grunt) {
 				log: 'out/lint.log',
 				jslintXml: 'out/jslint_xml.xml',
 				errorsOnly: true, // only display errors
-				failOnError: false // defaults to true
+				failOnError: false, // defaults to true
+				shebang: true // ignore shebang lines
 			}
 		}
 
