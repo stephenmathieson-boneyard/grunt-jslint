@@ -53,7 +53,10 @@ module.exports = function (grunt) {
 				return excludedFiles.indexOf(file) === -1;
 			});
 
-		runner(files, directives, function (err, report) {
+		options.directives = directives;
+
+
+		runner(files, options, function (err, report) {
 
 			var template;
 

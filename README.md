@@ -54,6 +54,9 @@ Supports the following options:
 			<li>
 				<b>failOnError</b> - A Boolean option - defaults to <code>true</code>; when set to <code>false</code>, grunt will not fail if JSLint detects an error.
 			</li>
+			<li>
+				<b>shebang</b> - Remove shebang lines (`#!/usr/bin/whatever`) from files before linting them
+			</li>
 		</ul>
 
 	</li>
