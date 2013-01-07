@@ -83,6 +83,10 @@ module.exports = function (grunt) {
 				grunt.file.write(options.jslintXml, reports.jslintXml(report));
 			}
 
+			if (options.checkstyle) {
+				grunt.file.write(options.checkstyle, reports.checkstyle(report));
+			}
+
 			grunt.log.write(template);
 
 			if (report.failures) {

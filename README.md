@@ -55,6 +55,9 @@ Supports the following options:
 				<b>failOnError</b> - A Boolean option - defaults to <code>true</code>; when set to <code>false</code>, grunt will not fail if JSLint detects an error.
 			</li>
 			<li>
+				<b>checkstyle</b> - A String/filepath option which, when provided, tells the plugin where to write a CheckStyle-XML file to.
+			</li>
+			<li>
 				<b>shebang</b> - Ignore shebang lines (`#!/usr/bin/whatever`) from files
 			</li>
 		</ul>
@@ -102,7 +105,8 @@ module.exports = function (grunt) {
 				jslintXml: 'out/jslint_xml.xml',
 				errorsOnly: true, // only display errors
 				failOnError: false, // defaults to true
-				shebang: true // ignore shebang lines
+				shebang: true, // ignore shebang lines
+				checkstyle: 'out/checkstyle.xml' // write a checkstyle-XML
 			}
 		}
 
