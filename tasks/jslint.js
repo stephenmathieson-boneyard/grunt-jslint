@@ -45,10 +45,10 @@ module.exports = function (grunt) {
 			options.failOnError = true;
 		}
 
-		excludedFiles = grunt.file.expandFiles(excludedFiles);
+		excludedFiles = grunt.file.expand(excludedFiles);
 
 		files = grunt.file
-			.expandFiles(files)
+			.expand(files)
 			.filter(function (file) {
 				return excludedFiles.indexOf(file) === -1;
 			});
