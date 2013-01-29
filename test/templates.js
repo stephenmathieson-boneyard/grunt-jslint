@@ -34,6 +34,9 @@ suite.addBatch({
 		'should contain an "jslint-xml" template': function (templates) {
 			assert.include(templates, 'jslint-xml');
 		},
+		'should contain a "checkstyle" template': function (templates) {
+			assert.include(templates, 'checkstyle');
+		},
 		'should contain an "junit-xml" template': function (templates) {
 			assert.include(templates, 'junit-xml');
 		}

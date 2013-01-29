@@ -53,7 +53,9 @@ module.exports = function (grunt) {
 				return excludedFiles.indexOf(file) === -1;
 			});
 
-		runner(files, directives, function (err, report) {
+		options.directives = directives;
+
+		runner(files, options, function (err, report) {
 
 			var template;
 
@@ -78,6 +80,10 @@ module.exports = function (grunt) {
 
 			if (options.jslintXml) {
 				grunt.file.write(options.jslintXml, reports.jslintXml(report));
+			}
+
+			if (options.checkstyle) {
+				grunt.file.write(options.checkstyle, reports.checkstyle(report));
 			}
 
 			grunt.log.write(template);
