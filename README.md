@@ -138,6 +138,9 @@ Run `./test.sh` in the root of your repository.
 
 ### 0.2.5
 
+- Fixed `failOnError` bug (@glan)
+- Fixed JSLint XML bug (@glan)
+- Another grunt 0.4.x support bug (@glan)
 - Bug fix for XML reports (non-escaped characters)
 - Added checkstyle XML reporting
 - Added `shebang` option
