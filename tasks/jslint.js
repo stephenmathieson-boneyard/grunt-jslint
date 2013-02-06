@@ -86,6 +86,10 @@ module.exports = function (grunt) {
 				grunt.file.write(options.checkstyle, reports.checkstyle(report));
 			}
 
+			if (grunt.option('no-color')) {
+				template = grunt.log.uncolor(template);
+			}
+
 			grunt.log.write(template);
 
 			if (report.failures && options.failOnError) {
