@@ -1,6 +1,6 @@
 # grunt-jslint
 
-Validates JavaScript files with [JSLint](https://github.com/douglascrockford/JSLint) as a [grunt](https://github.com/cowboy/grunt) task.
+Validates JavaScript files with [JSLint] as a [grunt](https://github.com/cowboy/grunt) task.
 
 ## Installation
 Install this grunt plugin next to your project's [grunt.js gruntfile][getting_started] with: `npm install grunt-jslint`
@@ -11,108 +11,71 @@ Then add this line to your project's gruntfile:
 grunt.loadNpmTasks('grunt-jslint');
 ```
 
-[npm_registry_page]: http://search.npmjs.org/#/grunt-jslint
-[grunt]: https://github.com/cowboy/grunt
-[getting_started]: https://github.com/cowboy/grunt/blob/master/docs/getting_started.md
-
 ## Documentation
 
 A single-task to validate your JavaScript files with JSLint.
 
 Supports the following options:
 
-
-<ul>
-	<li>
-		<b>files</b> - An array of files or <a href="https://github.com/gruntjs/grunt/blob/master/docs/api_file.md#file-lists-and-wildcards">wildcards</a> which you want to be validated with JSLint.
-	</li>
-
-	<li>
-		<b>exclude</b> - A String/filepath/wildcard option which, when provided, tells the plugin which files should be ignored (not scanned).
-	</li>
-
-	<li>
-		<b>directives</b> - Configuration options/settings to pre-define in JSLint.  Pre-defined globals are included within this object as <code>predef: ['myglobal']</code>
-	</li>
-
-	<li>
-		<b>options</b> - Configuration options/settings for the plugin itself.  Currently supports the following:
-
-		<ul>
-			<li>
-				<b>errorsOnly</b> - A Boolean option which tells the plugin to only display errors when set to <code>true</code>.
-			</li>
-			<li>
-				<b>log</b> - A String/filepath option which, when provided, tells the plugin where to write a verbose log to.
-			</li>
-			<li>
-				<b>junit</b> - A String/filepath option which, when provided, tells the plugin where to write a JUnit-style XML file to.
-			</li>
-			<li>
-				<b>jslintXml</b> - A String/filepath option which, when provided, tells the plugin where to write a JSLint-style XML file to.
-			</li>
-			<li>
-				<b>failOnError</b> - A Boolean option - defaults to <code>true</code>; when set to <code>false</code>, grunt will not fail if JSLint detects an error.
-			</li>
-			<li>
-				<b>checkstyle</b> - A String/filepath option which, when provided, tells the plugin where to write a CheckStyle-XML file to.
-			</li>
-			<li>
-				<b>shebang</b> - Ignore shebang lines (`#!/usr/bin/whatever`) from files
-			</li>
-		</ul>
-
-	</li>
-</ul>
-
+- **files** An array of files or [wildcards] which you want to be validated by JSLint
+- **exclude** An array of files or [wildcards] which you do *not* want to be validated by JSLint
+- **directives** Configuration options/settings to pre-define in JSLint.  Pre-defined globals are included within this object as `predef: ['myglobal']`
+- **options**
+    - **errorsOnly** A Boolean option which tells the plugin to only display errors when set to `true`
+    - **log** A String/filepath option which, when provided, tells the plugin where to write a verbose log to
+    - **junit** A String/filepath option which, when provided, tells the plugin where to write a JUnit-style XML file to
+    - **failOnError** A Boolean option - defaults to `true`; when set to `false`, grunt will not fail if JSLint detects an error
+    - **checkstyle** A String/filepath option which, when provided, tells the plugin where to write a CheckStyle-XML file to
+    - **shebang** Ignore shebang lines (`#!/usr/bin/whatever`) from files
 
 ## Example Usage
+
 ```javascript
 /*jslint node:true*/
 
 module.exports = function (grunt) {
 
-	'use strict';
+  'use strict';
 
-	grunt.loadNpmTasks('grunt-jslint'); // load the task
+  grunt.loadNpmTasks('grunt-jslint'); // load the task
 
-	grunt.initConfig({
-		watch: {
-			files: '<config:jslint.files>',
-			tasks: 'jslint'
-		},
+  grunt.initConfig({
+    watch: {
+      files: '<config:jslint.files>',
+      tasks: 'jslint'
+    },
 
-		jslint: { // configure the task
-			files: [ // some example files
-				'grunt.js',
-				'src/**/*.js'
-			],
-			exclude: [
-				'**/ignore-*.js',
-				'bananas.js'
-			],
-			directives: { // example directives
-				browser: true,
-				unparam: true,
-				todo: true,
-				predef: [ // array of pre-defined globals
-					'jQuery'
-				]
-			},
-			options: {
-				junit: 'out/junit.xml', // write the output to a JUnit XML
-				log: 'out/lint.log',
-				jslintXml: 'out/jslint_xml.xml',
-				errorsOnly: true, // only display errors
-				failOnError: false, // defaults to true
-				shebang: true, // ignore shebang lines
-				checkstyle: 'out/checkstyle.xml' // write a checkstyle-XML
-			}
-		}
+    jslint: { // configure the task
+      files: [ // some example files
+        'grunt.js',
+        'src/**/*.js'
+      ],
+      exclude: [
+        '**/ignore-*.js',
+        'bananas.js'
+      ],
+      directives: { // example directives
+        browser: true,
+        unparam: true,
+        todo: true,
+        predef: [ // array of pre-defined globals
+          'jQuery'
+        ]
+      },
+      options: {
+        junit: 'out/junit.xml', // write the output to a JUnit XML
+        log: 'out/lint.log',
+        jslintXml: 'out/jslint_xml.xml',
+        errorsOnly: true, // only display errors
+        failOnError: false, // defaults to true
+        shebang: true, // ignore shebang lines
+        checkstyle: 'out/checkstyle.xml' // write a checkstyle-XML
+      }
+    }
 
-	});
+  });
 
-	grunt.registerTask('default', 'watch');
+  grunt.registerTask('default', 'watch');
 };
 ```
 
@@ -195,3 +158,9 @@ Run `./test.sh` in the root of your repository.
 ## License
 Copyright (c) 2012 Stephen Mathieson
 Licensed under the WTFPL license.
+
+[npm_registry_page]: http://search.npmjs.org/#/grunt-jslint
+[grunt]: https://github.com/cowboy/grunt
+[getting_started]: https://github.com/cowboy/grunt/blob/master/docs/getting_started.md
+[wildcards]: https://github.com/gruntjs/grunt/blob/master/docs/api_file.md#file-lists-and-wildcards
+[JSLint]: https://github.com/douglascrockford/JSLint
