@@ -1,5 +1,3 @@
 #!/bin/sh
 
-for test in test/*.js; do
-	node $test
-done
+./node_modules/.bin/vows ./test/*.js --spec
