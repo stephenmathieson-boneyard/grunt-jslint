@@ -120,7 +120,7 @@ suite.addBatch({
 				var parser = new Parser(),
 					callback = this.callback;
 
-				runner([ path('sloppy.js'), path('white.js') ], {}, function (err, report) {
+				runner([ path('sloppy.js'), path('white.js'), path('var.js') ], {}, function (err, report) {
 					assert.ifError(err);
 					parser.parseString(reports.checkstyle(report), callback);
 				});
@@ -131,8 +131,8 @@ suite.addBatch({
 			'should use the "checkstyle" namespace': function (err, xml) {
 				assert.ok(xml.checkstyle);
 			},
-			'should contain two file nodes': function (err, xml) {
-				assert.lengthOf(xml.checkstyle.file, 2);
+			'should contain three file nodes': function (err, xml) {
+				assert.lengthOf(xml.checkstyle.file, 3);
 			},
 			'should contain an error node for each file': function (err, xml) {
 				xml.checkstyle.file.forEach(function (file) {
@@ -160,7 +160,7 @@ suite.addBatch({
 				var parser = new Parser(),
 					callback = this.callback;
 
-				runner([ path('sloppy.js'), path('white.js') ], {}, function (err, report) {
+				runner([ path('sloppy.js'), path('white.js'), path('var.js') ], {}, function (err, report) {
 					assert.ifError(err);
 					parser.parseString(reports.jslintXml(report), callback);
 				});
@@ -171,8 +171,8 @@ suite.addBatch({
 			'should use the "jslint" namespace': function (err, xml) {
 				assert.ok(xml.jslint);
 			},
-			'should contain two file nodes': function (err, xml) {
-				assert.lengthOf(xml.jslint.file, 2);
+			'should contain three file nodes': function (err, xml) {
+				assert.lengthOf(xml.jslint.file, 3);
 			},
 			'should contain an issue node for each file': function (err, xml) {
 				xml.jslint.file.forEach(function (file) {
@@ -197,7 +197,7 @@ suite.addBatch({
 				var parser = new Parser(),
 					callback = this.callback;
 
-				runner([ path('sloppy.js'), path('white.js') ], {}, function (err, report) {
+				runner([ path('sloppy.js'), path('white.js'), path('var.js') ], {}, function (err, report) {
 					assert.ifError(err);
 					parser.parseString(reports.junitXml(report), callback);
 				});
