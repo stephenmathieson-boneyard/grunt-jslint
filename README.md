@@ -98,6 +98,9 @@ Run `./test.sh` in the root of your repository.
 
 ## Release History
 
+### 0.2.5a
+
+- Make [grunt] a devDependency to speed up `npm install` time
 
 ### 0.2.5
 
