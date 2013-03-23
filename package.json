@@ -26,9 +26,9 @@
     "node": "*"
   },
   "dependencies": {
-    "grunt": "~0.4.0"
   },
   "devDependencies": {
+    "grunt": "~0.4.0",
     "vows": "*",
     "xml2js": "*"
   },
