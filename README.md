@@ -98,6 +98,11 @@ Run `./test.sh` in the root of your repository.
 
 ## Release History
 
+### 0.2.6
+
+- Updated [JSLint to edition 2013-05-16](https://github.com/douglascrockford/JSLint/commit/1d8c1f8f7410b505ccbb039a74025cd75a926ce3) per [#25](https://github.com/stephenmathieson/grunt-jslint/issues/25)
+- Added a Makefile and replaced *test.sh*
+
 ### 0.2.5a
 
 - Make [grunt] a devDependency to speed up `npm install` time
