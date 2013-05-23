@@ -89,12 +89,11 @@ Run `grunt jslint` in the root of your repository.
 
 ### Running the tests
 
-Run `./test.sh` in the root of your repository.
+Run `make test` in the root of your repository.
 
 ## TODOs
 
 - better test coverage
-- test-runner for Windows
 
 ## Release History
 
