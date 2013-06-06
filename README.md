@@ -1,5 +1,7 @@
 # grunt-jslint
 
+[![Dependency Status](https://gemnasium.com/stephenmathieson/grunt-jslint.png)](https://gemnasium.com/stephenmathieson/grunt-jslint)
+
 Validates JavaScript files with [JSLint] as a [grunt](https://github.com/cowboy/grunt) task.
 
 ## Installation
