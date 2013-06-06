@@ -25,6 +25,9 @@
   "engines": {
     "node": "*"
   },
+  "scripts": {
+    "test": "node_modules/.bin/vows test/*.js --spec --no-color"
+  },
   "dependencies": {
   },
   "devDependencies": {
