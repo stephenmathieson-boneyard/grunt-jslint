@@ -1,2 +1,8 @@
 out
 node_modules/
+
+.idea/*
+*.iml
+projectFilesBackup
+
+.DS_Store
