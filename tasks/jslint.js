@@ -6,12 +6,10 @@
  * Licensed under the WTFPL license.
  */
 
-/*jslint node:true*/
-
 'use strict';
 
-var reports = require('../lib/reports'),
-  runner = require('../lib/runner');
+var jslint = require('../lib/runner'),
+  reports = jslint.reporters;
 
 module.exports = function (grunt) {
 
@@ -44,7 +42,7 @@ module.exports = function (grunt) {
 
     options.directives = directives;
 
-    runner(files, options, function (err, report) {
+    jslint(files, options, function (err, report) {
 
       var template;
 
@@ -64,11 +62,11 @@ module.exports = function (grunt) {
       }
 
       if (options.junit) {
-        grunt.file.write(options.junit, reports.junitXml(report));
+        grunt.file.write(options.junit, reports.junit(report));
       }
 
       if (options.jslintXml) {
-        grunt.file.write(options.jslintXml, reports.jslintXml(report));
+        grunt.file.write(options.jslintXml, reports.jslint(report));
       }
 
       if (options.checkstyle) {
@@ -89,20 +87,17 @@ module.exports = function (grunt) {
     });
   }
 
-  /**
-   * Grabs a config option from the jslint namespace
-   *
-   * @param  {String} option The option/configuration key
-   * @return {Mixed|Any}     The key's value
-   */
-  function conf(option) {
-    return grunt.config('jslint.' + option);
-  }
-
-  /**
-   * The task
-   */
   grunt.registerTask('jslint', 'Validate JavaScript files with JSLint', function () {
+    /**
+     * Grabs a config option from the jslint namespace
+     *
+     * @api private
+     * @param {String} option
+     * @return {Mixed|Any}
+     */
+    function conf(option) {
+      return grunt.config('jslint.' + option);
+    }
 
     var next = this.async(),
       files = conf('files'),
@@ -113,9 +108,6 @@ module.exports = function (grunt) {
     task(next, files, excludedFiles, options, directives);
   });
 
-  /**
-   * The task
-   */
   grunt.registerMultiTask('jslintm', 'Validate JavaScript files with JSLint', function () {
     var next = this.async(),
       files = this.filesSrc,

@@ -21,7 +21,7 @@ var assert = require('assert');
 
 var runner = require('../lib/runner.js');
 
-var reports = require('../lib/reports.js');
+var reports = runner.reporters;
 
 var suite = vows.describe('reporters');
 
@@ -70,7 +70,7 @@ suite.addBatch({
       var callback = this.callback;
 
       runner([ path('sloppy.js'), path('white.js') ], {}, function (err, report) {
-        callback(err, reports.junitXml(report));
+        callback(err, reports.junit(report));
       });
     },
     'should not have errored': function (err, result) {
@@ -87,7 +87,7 @@ suite.addBatch({
       var callback = this.callback;
 
       runner([ path('sloppy.js'), path('white.js') ], {}, function (err, report) {
-        callback(err, reports.jslintXml(report));
+        callback(err, reports.jslint(report));
       });
     },
     'should not have errored': function (err, result) {
@@ -163,7 +163,7 @@ suite.addBatch({
 
         runner([ path('sloppy.js'), path('white.js'), path('var.js') ], {}, function (err, report) {
           assert.ifError(err);
-          parser.parseString(reports.jslintXml(report), callback);
+          parser.parseString(reports.jslint(report), callback);
         });
       },
       'should not error': function (err, xml) {
@@ -200,7 +200,7 @@ suite.addBatch({
 
         runner([ path('sloppy.js'), path('white.js'), path('var.js') ], {}, function (err, report) {
           assert.ifError(err);
-          parser.parseString(reports.junitXml(report), callback);
+          parser.parseString(reports.junit(report), callback);
         });
       },
       'should not error': function (err, xml) {
@@ -247,7 +247,7 @@ suite.addBatch({
             assert.includes(name, ':');
 
             // test name is  `<filename>:<line>:<char>`
-            assert.match(name, /^[a-z]+\.js\:\d\:[\d]+$/i);
+            assert.match(name, /^[a-z]+\:\d\:[\d]+$/i);
           });
         },
         'each testcase should only contain one failure': function (testcases) {

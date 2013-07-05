@@ -1,20 +1,22 @@
-/*jslint node:true*/
 'use strict';
 
 module.exports = function (grunt) {
-  // Project configuration.
   grunt.initConfig({
     jslint: {
-      files: [ // some example files
-        'grunt.js',
+      files: [
+        'Gruntfile.js',
         'lib/**/*.js',
         'tasks/jslint.js',
         'test/*.js'
       ],
-      directives: { // some example JSLint directives
-        unused: true, // pseudo-directive, will report unused variables
+      directives: {
+        unused: true,
         todo: true,
-        indent: 2
+        indent: 2,
+        nomen: true,
+        node: true,
+        stupid: true,
+        ass: true
       },
       options: {
         junit: 'out/junit.xml',

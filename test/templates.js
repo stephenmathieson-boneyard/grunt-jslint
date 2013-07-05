@@ -18,7 +18,7 @@ var suite = vows.describe('templates');
 suite.addBatch({
   'sanity': {
     topic: function () {
-      return require('../lib/templates');
+      return require('../lib/runner').reporters;
     },
     'should be an object': function (templates) {
       assert.isObject(templates);
@@ -26,20 +26,20 @@ suite.addBatch({
     'should have multiple keys': function (templates) {
       assert.ok(Object.keys(templates).length);
     },
-    'should contain an "errors-only" template': function (templates) {
-      assert.include(templates, 'errors-only');
+    'should contain an "errorsOnly" template': function (templates) {
+      assert.include(templates, 'errorsOnly');
     },
     'should contain an "standard" template': function (templates) {
       assert.include(templates, 'standard');
     },
-    'should contain an "jslint-xml" template': function (templates) {
-      assert.include(templates, 'jslint-xml');
+    'should contain an "jslint" template': function (templates) {
+      assert.include(templates, 'jslint');
     },
     'should contain a "checkstyle" template': function (templates) {
       assert.include(templates, 'checkstyle');
     },
-    'should contain an "junit-xml" template': function (templates) {
-      assert.include(templates, 'junit-xml');
+    'should contain an "junit" template': function (templates) {
+      assert.include(templates, 'junit');
     }
   }
 });
