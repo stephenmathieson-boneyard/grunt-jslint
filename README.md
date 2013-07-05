@@ -165,7 +165,7 @@ Run `make test` in the root of your repository.
 
 
 ## License
-Copyright (c) 2012 Stephen Mathieson
+Copyright (c) 2013 Stephen Mathieson
 Licensed under the WTFPL license.
 
 [npm_registry_page]: http://search.npmjs.org/#/grunt-jslint

@@ -2,7 +2,7 @@
  * grunt-jslint
  * https://github.com/stephenmathieson/grunt-jslint
  *
- * Copyright (c) 2012 Stephen Mathieson
+ * Copyright (c) 2013 Stephen Mathieson
  * Licensed under the WTFPL license.
  */
 
