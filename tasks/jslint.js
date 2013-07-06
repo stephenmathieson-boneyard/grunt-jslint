@@ -8,8 +8,7 @@
 
 'use strict';
 
-var jslint = require('../lib/runner'),
-  reports = jslint.reporters;
+var jslint = require('..');
 
 module.exports = function (grunt) {
 
@@ -42,7 +41,7 @@ module.exports = function (grunt) {
 
     options.directives = directives;
 
-    jslint(files, options, function (err, report) {
+    jslint.runner(files, options, function (err, report) {
 
       var template;
 
@@ -52,9 +51,9 @@ module.exports = function (grunt) {
       }
 
       if (options.errorsOnly) {
-        template = reports.errorsOnly(report);
+        template = jslint.reporters.errorsOnly(report);
       } else {
-        template = reports.standard(report);
+        template = jslint.reporters.standard(report);
       }
 
       if (options.log) {
@@ -62,15 +61,15 @@ module.exports = function (grunt) {
       }
 
       if (options.junit) {
-        grunt.file.write(options.junit, reports.junit(report));
+        grunt.file.write(options.junit, jslint.reporters.junit(report));
       }
 
       if (options.jslintXml) {
-        grunt.file.write(options.jslintXml, reports.jslint(report));
+        grunt.file.write(options.jslintXml, jslint.reporters.jslint(report));
       }
 
       if (options.checkstyle) {
-        grunt.file.write(options.checkstyle, reports.checkstyle(report));
+        grunt.file.write(options.checkstyle, jslint.reporters.checkstyle(report));
       }
 
       if (grunt.option('no-color')) {

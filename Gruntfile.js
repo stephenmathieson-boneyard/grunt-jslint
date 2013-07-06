@@ -4,6 +4,7 @@ module.exports = function (grunt) {
   grunt.initConfig({
     jslint: {
       files: [
+        'index.js',
         'Gruntfile.js',
         'lib/**/*.js',
         'tasks/jslint.js',
@@ -16,7 +17,9 @@ module.exports = function (grunt) {
         nomen: true,
         node: true,
         stupid: true,
-        ass: true
+        ass: true,
+        plusplus: true,
+        regexp: true
       },
       options: {
         junit: 'out/junit.xml',

@@ -1,11 +1,6 @@
-/*jslint node:true, es5:true*/
-/*jslint unparam: true, indent: 2 */
+/*jslint unparam:true*/
 
 'use strict';
-var ROOT = (function () {
-  /*jslint nomen:true*/
-  return __dirname;
-}());
 
 var path = require('path');
 
@@ -13,14 +8,14 @@ var vows = require('vows');
 
 var assert = require('assert');
 
-var validate = require('../lib/jslint.js');
+var validate = require('..').validate;
 
 var suite = vows.describe('validate');
 
 suite.addBatch({
   'no directives': {
     topic: function () {
-      var file = path.join(ROOT, 'fixtures', 'white.js');
+      var file = path.join(__dirname, 'fixtures', 'white.js');
       validate(file, {}, this.callback);
     },
     'should not error': function (err, report) {
@@ -38,7 +33,6 @@ suite.addBatch({
         assert.ok(issue.line);
         assert.ok(issue.character);
         assert.ok(issue.reason);
-        assert.ok(issue.fileName);
         assert.ok(issue.file);
       });
     },
@@ -53,7 +47,7 @@ suite.addBatch({
   'directives:': {
     'white': {
       topic: function () {
-        var file = path.join(ROOT, 'fixtures', 'white.js');
+        var file = path.join(__dirname, 'fixtures', 'white.js');
         validate(file, {
           'directives': {
             'white': true
@@ -70,7 +64,7 @@ suite.addBatch({
     },
     'sloppy': {
       topic: function () {
-        var file = path.join(ROOT, 'fixtures', 'sloppy.js');
+        var file = path.join(__dirname, 'fixtures', 'sloppy.js');
         validate(file, {
           'directives': {
             'sloppy': true
@@ -88,7 +82,7 @@ suite.addBatch({
   },
   'shebang option': {
     topic: function () {
-      var file = path.join(ROOT, 'fixtures', 'shebang');
+      var file = path.join(__dirname, 'fixtures', 'shebang');
       validate(file, { shebang: true }, this.callback);
     },
     'should not error': function (err, report) {

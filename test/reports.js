@@ -13,15 +13,12 @@ var path = (function () {
 
 }());
 
-var vows = require('vows');
-
-var Parser = require('xml2js').Parser;
-
-var assert = require('assert');
-
-var runner = require('../lib/runner.js');
-
-var reports = runner.reporters;
+var vows = require('vows'),
+  Parser = require('xml2js').Parser,
+  assert = require('assert'),
+  jslint = require('..'),
+  runner = jslint.runner,
+  reports = jslint.reporters;
 
 var suite = vows.describe('reporters');
 

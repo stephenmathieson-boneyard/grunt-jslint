@@ -1,24 +1,16 @@
-/*jslint node:true, es5:true*/
-/*jslint unparam: true, indent: 2 */
-
 'use strict';
-var ROOT = (function () {
-  /*jslint nomen:true*/
-  return __dirname;
-}());
 
-var path = require('path');
-
-var vows = require('vows');
-
-var assert = require('assert');
+var path = require('path'),
+  vows = require('vows'),
+  assert = require('assert'),
+  jslint = require('..');
 
 var suite = vows.describe('templates');
 
 suite.addBatch({
   'sanity': {
     topic: function () {
-      return require('../lib/runner').reporters;
+      return jslint.reporters;
     },
     'should be an object': function (templates) {
       assert.isObject(templates);

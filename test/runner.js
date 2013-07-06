@@ -1,19 +1,11 @@
-/*jslint node:true, es5:true*/
-/*jslint unparam: true, indent: 2 */
+/*jslint unparam:true*/
 
 'use strict';
-var ROOT = (function () {
-  /*jslint nomen:true*/
-  return __dirname;
-}());
 
-var path = require('path');
-
-var vows = require('vows');
-
-var assert = require('assert');
-
-var runner = require('../lib/runner.js');
+var path = require('path'),
+  vows = require('vows'),
+  assert = require('assert'),
+  runner = require('..').runner;
 
 var suite = vows.describe('runner');
 
@@ -29,7 +21,6 @@ function validateIssue(issue) {
   assert.ok(issue.line);
   assert.ok(issue.character);
   assert.ok(issue.reason);
-  assert.ok(issue.fileName);
   assert.ok(issue.file);
 }
 
@@ -107,8 +98,8 @@ function createBatch(title, topic) {
 
 suite.addBatch(createBatch('multiple files', function () {
   var files = [
-      path.join(ROOT, 'fixtures', 'sloppy.js'),
-      path.join(ROOT, 'fixtures', 'white.js')
+      path.join(__dirname, 'fixtures', 'sloppy.js'),
+      path.join(__dirname, 'fixtures', 'white.js')
     ],
     directives = {};
 
@@ -117,7 +108,7 @@ suite.addBatch(createBatch('multiple files', function () {
 
 suite.addBatch(createBatch('single file', function () {
   var files = [
-      path.join(ROOT, 'fixtures', 'sloppy.js')
+      path.join(__dirname, 'fixtures', 'sloppy.js')
     ],
     directives = {};
 
@@ -126,8 +117,8 @@ suite.addBatch(createBatch('single file', function () {
 
 suite.addBatch(createBatch('multiple directives', function () {
   var files = [
-      path.join(ROOT, 'fixtures', 'sloppy.js'),
-      path.join(ROOT, 'fixtures', 'white.js')
+      path.join(__dirname, 'fixtures', 'sloppy.js'),
+      path.join(__dirname, 'fixtures', 'white.js')
     ],
     directives = {
       'nomen': true,
@@ -141,8 +132,8 @@ suite.addBatch(createBatch('multiple directives', function () {
 
 suite.addBatch(createBatch('single directive', function () {
   var files = [
-      path.join(ROOT, 'fixtures', 'sloppy.js'),
-      path.join(ROOT, 'fixtures', 'white.js')
+      path.join(__dirname, 'fixtures', 'sloppy.js'),
+      path.join(__dirname, 'fixtures', 'white.js')
     ],
     directives = {
       'nomen': true
