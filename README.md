@@ -99,6 +99,12 @@ Run `make test` in the root of your repository.
 
 ## Release History
 
+### 0.3.0 (Unreleased)
+
+- Updated [JSLint to edition 2013-07-02](https://github.com/douglascrockford/JSLint/tree/5b5e58feccacadcc5666c2d0128a7dac0266951c)
+- Added a multitask `jslintm` (@ErisDS)
+- Major code refactor; use with caution
+
 ### 0.2.6
 
 - Updated [JSLint to edition 2013-05-16](https://github.com/douglascrockford/JSLint/commit/1d8c1f8f7410b505ccbb039a74025cd75a926ce3) per [#25](https://github.com/stephenmathieson/grunt-jslint/issues/25)
