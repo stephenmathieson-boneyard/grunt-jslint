@@ -1,6 +1,3 @@
-/*jslint node:true, es5:true*/
-/*jslint unparam: true, indent: 2 */
-
 'use strict';
 
 var path = (function () {
