@@ -2,10 +2,10 @@
 
 [![Build Status](https://travis-ci.org/stephenmathieson/grunt-jslint.png?branch=master)](https://travis-ci.org/stephenmathieson/grunt-jslint) [![Dependency Status](https://gemnasium.com/stephenmathieson/grunt-jslint.png)](https://gemnasium.com/stephenmathieson/grunt-jslint)
 
-Validates JavaScript files with [JSLint] as a [grunt](https://github.com/cowboy/grunt) task.
+Validates JavaScript files with [JSLint] as a [grunt] task.
 
 ## Installation
-Install this grunt plugin next to your project's [grunt.js gruntfile][getting_started] with: `npm install grunt-jslint`
+Install this grunt plugin next to your project's [Gruntfile][getting_started] with: `npm install grunt-jslint`
 
 Then add this line to your project's gruntfile:
 
@@ -15,7 +15,7 @@ grunt.loadNpmTasks('grunt-jslint');
 
 ## Documentation
 
-A single-task to validate your JavaScript files with JSLint.
+A multi-task to validate your JavaScript files with JSLint.
 
 Supports the following options:
 
@@ -30,54 +30,96 @@ Supports the following options:
     - **checkstyle** A String/filepath option which, when provided, tells the plugin where to write a CheckStyle-XML file to
     - **shebang** Ignore shebang lines (`#!/usr/bin/whatever`) from files
 
+### Moving to 1.0.0
+
+grunt-jslint@1.0.0 has moved from a single-task to a multi-task, allowing you to specify different options for different groups of files.
+
+For simple migration, just wrap `all: { ... }` around your jslint configuration in your Gruntfile and replace `files:` with `src:`.
+
+For example:
+
+```js
+module.exports = function (grunt) {
+  grunt.loadNpmTasks('grunt-jslint');
+  grunt.initConfig({
+    jslint: {
+      files: [ ... ],
+      options: { ... }
+    }
+  });
+};
+```
+
+has become:
+
+```js
+module.exports = function (grunt) {
+  grunt.loadNpmTasks('grunt-jslint');
+  grunt.initConfig({
+    jslint: {
+      all: {
+        src: [ ... ],
+        options: { ... }
+      }
+    }
+  });
+};
+```
+
+
 ## Example Usage
 
 ```javascript
-/*jslint node:true*/
-
 module.exports = function (grunt) {
-
   'use strict';
 
   grunt.loadNpmTasks('grunt-jslint'); // load the task
 
   grunt.initConfig({
-    watch: {
-      files: '<config:jslint.files>',
-      tasks: 'jslint'
-    },
-
     jslint: { // configure the task
-      files: [ // some example files
-        'grunt.js',
-        'src/**/*.js'
-      ],
-      exclude: [
-        '**/ignore-*.js',
-        'bananas.js'
-      ],
-      directives: { // example directives
-        browser: true,
-        unparam: true,
-        todo: true,
-        predef: [ // array of pre-defined globals
-          'jQuery'
-        ]
+      // lint your project's server code
+      server: {
+        src: [ // some example files
+          'server/lib/*.js',
+          'server/routes/*.js',
+          'server/*.js',
+          'server/test/*.js'
+        ],
+        exclude: [
+          'server/config.js'
+        ],
+        directives: { // example directives
+          node: true,
+          todo: true
+        },
+        options: {
+          junit: 'out/server-junit.xml', // write the output to a JUnit XML
+          log: 'out/server-lint.log',
+          jslintXml: 'out/server-jslint.xml',
+          errorsOnly: true, // only display errors
+          failOnError: false, // defaults to true
+          checkstyle: 'out/server-checkstyle.xml' // write a checkstyle-XML
+        }
       },
-      options: {
-        junit: 'out/junit.xml', // write the output to a JUnit XML
-        log: 'out/lint.log',
-        jslintXml: 'out/jslint_xml.xml',
-        errorsOnly: true, // only display errors
-        failOnError: false, // defaults to true
-        shebang: true, // ignore shebang lines
-        checkstyle: 'out/checkstyle.xml' // write a checkstyle-XML
+      // lint your project's client code
+      client: {
+        src: [
+          'client/**/*.js'
+        ],
+        directives: {
+          browser: true,
+          predef: [
+            'jQuery'
+          ]
+        },
+        options: {
+          junit: 'out/client-junit.xml'
+        }
       }
     }
-
   });
 
-  grunt.registerTask('default', 'watch');
+  grunt.registerTask('default', 'jslint');
 };
 ```
 
@@ -93,89 +135,12 @@ Run `grunt jslint` in the root of your repository.
 
 Run `make test` in the root of your repository.
 
-## TODOs
-
-- better test coverage
-
-## Release History
-
-### 0.3.0 (Unreleased)
-
-- Updated [JSLint to edition 2013-07-02](https://github.com/douglascrockford/JSLint/tree/5b5e58feccacadcc5666c2d0128a7dac0266951c)
-- Added a multitask `jslintm` (@ErisDS)
-- Major code refactor; use with caution
-
-### 0.2.6
-
-- Updated [JSLint to edition 2013-05-16](https://github.com/douglascrockford/JSLint/commit/1d8c1f8f7410b505ccbb039a74025cd75a926ce3) per [#25](https://github.com/stephenmathieson/grunt-jslint/issues/25)
-- Added a Makefile and replaced *test.sh*
-
-### 0.2.5a
-
-- Make [grunt] a devDependency to speed up `npm install` time
-
-### 0.2.5
-
-- Fixed `failOnError` bug (@glan)
-- Fixed JSLint XML bug (@glan)
-- Another grunt 0.4.x support bug (@glan)
-- Bug fix for XML reports (non-escaped characters)
-- Added checkstyle XML reporting
-- Added `shebang` option
-- Improved test coverage
-
-### 0.2.4
-
-- Re-factor everything, allowing for a test suite to be created
-- Updated the outputted JUnit-style XML for better intergration with Jenkins per @sbrandwoo
-- Removed unecessary dependencies
-
-### 0.2.3-1
-
-- Fix for bad template processing; thanks to @sbrandwoo
-
-### 0.2.3
-
-- Adding support for Grunt *0.4.x* by using [underscore's templating engine](http://underscorejs.org/#template), rather than Grunt's version of it
-- Updated JSLint to edition **2012-12-04**
-
-### 0.2.2-1
-
-- Updating JSLint to "edition" **2012-11-17**
-
-### 0.2.2
-
-- Adding option to not cause Grunt to fail if a violation is detected
-
-### 0.2.1
-
-- Added JSLint XML output for [Jenkins Violations Plugin](https://github.com/jenkinsci/violations-plugin)
-
-### 0.2.0
-
-- Cleaned up your `grunt.js` file for you - moved all options into the `jslint` object
-
-### 0.1.8
-
-- Updating README.md to contain more verbose documentation
-- Adding keywords to package.json
-
-### 0.1.7
-
-- Added an option to only report on errors
-
-### 0.1.6
-
-- Added an exclude option
-- Added number of files in violation to standard output
-
-
 ## License
 Copyright (c) 2013 Stephen Mathieson
 Licensed under the WTFPL license.
 
 [npm_registry_page]: http://search.npmjs.org/#/grunt-jslint
-[grunt]: https://github.com/cowboy/grunt
-[getting_started]: https://github.com/cowboy/grunt/blob/master/docs/getting_started.md
-[wildcards]: https://github.com/gruntjs/grunt/blob/master/docs/api_file.md#file-lists-and-wildcards
+[grunt]: http://gruntjs.com/
+[getting_started]: http://gruntjs.com/getting-started#the-gruntfile
+[wildcards]: http://gruntjs.com/configuring-tasks#files
 [JSLint]: https://github.com/douglascrockford/JSLint
