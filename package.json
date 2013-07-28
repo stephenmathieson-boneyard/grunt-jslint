@@ -26,7 +26,7 @@
     "node": "*"
   },
   "scripts": {
-    "test": "make test"
+    "test": "npm i -g grunt && make test"
   },
   "dependencies": {},
   "devDependencies": {
