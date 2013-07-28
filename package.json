@@ -1,7 +1,7 @@
 {
   "name": "grunt-jslint",
   "description": "Validates JavaScript files with JSLint",
-  "version": "0.2.6",
+  "version": "1.0.0",
   "homepage": "https://github.com/stephenmathieson/grunt-jslint",
   "author": {
     "name": "Stephen Mathieson",
@@ -20,20 +20,20 @@
       "url": "https://github.com/stephenmathieson/grunt-jslint/blob/master/LICENSE-WTFPL"
     }
   ],
-  "main": "grunt.js",
+  "main": "index.js",
   "bin": "bin/grunt-jslint",
   "engines": {
     "node": "*"
   },
   "scripts": {
-    "test": "node_modules/.bin/vows test/*.js --spec --no-color"
+    "test": "make test"
   },
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
-    "grunt": "~0.4.0",
-    "vows": "*",
-    "xml2js": "*"
+    "grunt": "~0.4.1",
+    "vows": "~0.7.0",
+    "xml2js": "~0.2.8",
+    "better-assert": "~1.0.0"
   },
   "keywords": [
     "gruntplugin",
