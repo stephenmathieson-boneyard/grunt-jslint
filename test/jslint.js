@@ -9,6 +9,18 @@ var validate = require('..').validate,
 
 suite.addBatch({
 
+  'metadata': {
+    topic: function () {
+      this.callback(null, require('..'));
+    },
+    'should expose the JSLint edition': function (err, jslint) {
+      assert.isString(jslint.edition);
+      assert.matches(jslint.edition, /\d{4}-\d{2}-\d{2}/);
+      // should throw on malformed dates
+      assert.instanceOf(new Date(jslint.edition), Date);
+    }
+  },
+
   'predef -> globals': {
     'with directives.globals': {
       topic: function () {
