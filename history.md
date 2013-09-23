@@ -1,5 +1,10 @@
 # Release History
 
+## 1.1.0
+
+- Updated [JSLint to edition 2013-09-20](https://github.com/douglascrockford/JSLint/commit/502f26ba1f2172ba9b412797ad88b5d709c123f9)
+- Exposed current edition of JSLint (`require('grunt-jslint').edition`)
+
 ## 1.0.0
 
 - Moved to a [multi-task](http://gruntjs.com/creating-tasks#multi-tasks), allowing multiple groupings of files to be linted
