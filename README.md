@@ -30,42 +30,6 @@ Supports the following options:
     - **checkstyle** A String/filepath option which, when provided, tells the plugin where to write a CheckStyle-XML file to
     - **shebang** Ignore shebang lines (`#!/usr/bin/whatever`) from files
 
-### Moving to 1.x.0
-
-grunt-jslint@1.x.0 has moved from a single-task to a multi-task, allowing you to specify different options for different groups of files.
-
-For simple migration, just wrap `all: { ... }` around your jslint configuration in your Gruntfile and replace `files:` with `src:`.
-
-For example:
-
-```js
-module.exports = function (grunt) {
-  grunt.loadNpmTasks('grunt-jslint');
-  grunt.initConfig({
-    jslint: {
-      files: [ ... ],
-      options: { ... }
-    }
-  });
-};
-```
-
-has become:
-
-```js
-module.exports = function (grunt) {
-  grunt.loadNpmTasks('grunt-jslint');
-  grunt.initConfig({
-    jslint: {
-      all: {
-        src: [ ... ],
-        options: { ... }
-      }
-    }
-  });
-};
-```
-
 
 ## Example Usage
 
