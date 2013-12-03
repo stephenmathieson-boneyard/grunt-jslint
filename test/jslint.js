@@ -124,6 +124,7 @@ suite.addBatch({
       }
     }
   },
+
   'shebang option': {
     topic: function () {
       var file = path.join(__dirname, 'fixtures', 'shebang');
@@ -137,6 +138,26 @@ suite.addBatch({
       assert.lengthOf(report, 0);
     }
   },
+
+  'unused option': {
+    topic: function () {
+      var file = path.join(__dirname, 'fixtures', 'unused.js');
+      validate(file, {}, this.callback);
+    },
+    'should not error': function (err, report) {
+      assert.ifError(err);
+    },
+    'should report at least two violations': function (err, report) {
+      assert(report.length >= 2);
+    },
+    'should report on unused parameters': function (err, report) {
+      assert.equal(report[0].reason, 'Unused \'c\'.');
+    },
+    'should report on unused vars': function (err, report) {
+      assert.equal(report[1].reason, 'Unused \'b\'.');
+    }
+  },
+
   'missing file': {
     topic: function () {
       validate('cats and dogs', {}, this.callback);
