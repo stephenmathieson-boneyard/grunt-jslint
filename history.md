@@ -1,7 +1,8 @@
 # Release History
 
-## head
+## 1.1.2
 
+- Removed dead code (see [#33](https://github.com/stephenmathieson/grunt-jslint/issues/33))
 - Updated [JSLint to edition 2013-11-23](https://github.com/douglascrockford/JSLint/commit/bd6da6b0eb808cf9c2813d8952591898d8f580b6)
 
 
