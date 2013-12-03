@@ -1,5 +1,10 @@
 # Release History
 
+## head
+
+- Updated [JSLint to edition 2013-11-23](https://github.com/douglascrockford/JSLint/commit/bd6da6b0eb808cf9c2813d8952591898d8f580b6)
+
+
 ## 1.1.1
 
 - Updated [JSLint to edition 2013-09-22](https://github.com/douglascrockford/JSLint/commit/256cf8decf04e7dc9012176d81c90b7128fcd30d)
