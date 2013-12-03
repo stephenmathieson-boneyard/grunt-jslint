@@ -8,8 +8,8 @@
 
 'use strict';
 
-var jslint = require('..'),
-  pkg = require('../package.json');
+var jslint = require('..');
+var pkg = require('../package.json');
 
 /**
  * Register the `jslint` task
@@ -19,8 +19,7 @@ var jslint = require('..'),
  */
 var gruntJSLint = module.exports = function (grunt) {
   grunt.registerMultiTask('jslint', 'Validate JavaScript files with JSLint', function () {
-    var conf,
-      next = this.async();
+    var next = this.async();
 
     if (grunt.config('jslint.files') || grunt.config('jslint.options')) {
       // single-task is deprecated
@@ -34,7 +33,7 @@ var gruntJSLint = module.exports = function (grunt) {
       }());
     }
 
-    conf = {
+    var conf = {
       files: this.filesSrc,
       exclude: this.data.exclude || [],
       options: this.data.options || {},
@@ -55,9 +54,9 @@ var gruntJSLint = module.exports = function (grunt) {
  * @param {Function} next
  */
 gruntJSLint.task = function (grunt, config, next) {
-  var files = config.files,
-    excludedFiles = config.exclude,
-    options = config.options;
+  var files = config.files;
+  var excludedFiles = config.exclude;
+  var options = config.options;
 
   if (!files || !files.length) {
     grunt.log.error('NO FILES?!?');
