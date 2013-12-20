@@ -4,6 +4,10 @@
 
 Validates JavaScript files with [JSLint] as a [grunt] task.
 
+## Notice
+
+  I'm looking for a maintainer for this project.  I don't use Grunt, so I have no desire to maintain this.  If you're interested, please let me know via issue or email.
+
 ## Installation
 Install this grunt plugin next to your project's [Gruntfile][getting_started] with: `npm install grunt-jslint`
 
