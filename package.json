@@ -28,12 +28,15 @@
   "scripts": {
     "test": "make test"
   },
-  "dependencies": {},
+  "dependencies": {
+    "jslint": "~0.2"
+  },
   "devDependencies": {
     "grunt": "~0.4.1",
     "vows": "~0.7.0",
     "xml2js": "~0.2.8",
-    "better-assert": "~1.0.0"
+    "better-assert": "~1.0.0",
+    "jscoverage": "~0.3.8"
   },
   "keywords": [
     "gruntplugin",

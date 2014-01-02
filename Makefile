@@ -18,7 +18,7 @@ $(ACCEPTANCE_TESTS):
 	@echo 'ok'
 
 lib-cov:
-	jscoverage lib lib-cov
+	./node_modules/.bin/jscoverage lib lib-cov
 
 lint:
 	grunt jslint
