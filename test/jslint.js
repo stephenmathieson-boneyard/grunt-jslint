@@ -4,8 +4,16 @@ var path = require('path'),
   vows = require('vows'),
   assert = require('assert');
 
-var validate = require('..').validate,
-  suite = vows.describe('validate');
+var jslint = require('..'),
+    validate = jslint.validate,
+    suite = vows.describe('validate');
+
+function getFixture(file) {
+    return path.join(__dirname, 'fixtures', file);
+}
+
+// added for testing edition selection
+var initialEdition;
 
 suite.addBatch({
 
@@ -24,7 +32,7 @@ suite.addBatch({
   'predef -> globals': {
     'with directives.globals': {
       topic: function () {
-        var file = path.join(__dirname, 'fixtures', 'globals.js'),
+        var file = getFixture('globals.js'),
           opts = {
             directives: {
               globals: [ 'someglobal' ]
@@ -42,7 +50,7 @@ suite.addBatch({
     },
     'without directives.globals': {
       topic: function () {
-        var file = path.join(__dirname, 'fixtures', 'globals.js');
+        var file = getFixture('globals.js');
 
         validate(file, {}, this.callback);
       },
@@ -57,9 +65,62 @@ suite.addBatch({
     }
   },
 
+  'select edition': {
+    'with default edition': {
+      topic: function () {
+        jslint.loadJSLint('latest', this.callback);
+      },
+      'should not error': function (err, report) {
+        assert.ifError(err);
+      },
+      'should have an edition': function (err, report) {
+        initialEdition = report;
+        assert.ok(report);
+      }
+    },
+    'with explicit edition': {
+      topic: function () {
+        jslint.loadJSLint('2013-02-03', this.callback);
+      },
+      'should not error': function (err, report) {
+        assert.ifError(err);
+      },
+      'should have selected edition': function (err, report) {
+        assert.equal('2013-02-03', report);
+      }
+    },
+    'with latest edition': {
+      topic: function () {
+        jslint.loadJSLint('latest', this.callback);
+      },
+      'should not error': function (err, report) {
+        assert.ifError(err);
+      },
+      'should be back to default(initial) edition': function (err, report) {
+          assert.equal(initialEdition, report);
+      }
+    },
+    'via runner': {
+      topic: function () {
+        var file = getFixture('clean.js');
+
+        jslint.runner([file], {edition: 'latest'}, this.callback);
+      },
+      'should not error': function (err, report) {
+        assert.ifError(err);
+      },
+      'should have no errors': function (err, report) {
+        assert.isObject(report);
+        assert.isObject(report.files);
+        assert.equal(1, report.file_count);
+        assert.equal(0, report.failures);
+      }
+    }
+  },
+
   'no directives': {
     topic: function () {
-      var file = path.join(__dirname, 'fixtures', 'white.js');
+      var file = getFixture('white.js');
       validate(file, {}, this.callback);
     },
     'should not error': function (err, report) {
@@ -91,7 +152,7 @@ suite.addBatch({
   'directives:': {
     'white': {
       topic: function () {
-        var file = path.join(__dirname, 'fixtures', 'white.js');
+        var file = getFixture('white.js');
         validate(file, {
           'directives': {
             'white': true
@@ -108,7 +169,7 @@ suite.addBatch({
     },
     'sloppy': {
       topic: function () {
-        var file = path.join(__dirname, 'fixtures', 'sloppy.js');
+        var file = getFixture('sloppy.js');
         validate(file, {
           'directives': {
             'sloppy': true
@@ -127,7 +188,7 @@ suite.addBatch({
 
   'shebang option': {
     topic: function () {
-      var file = path.join(__dirname, 'fixtures', 'shebang');
+      var file = getFixture('shebang');
       validate(file, { shebang: true }, this.callback);
     },
     'should not error': function (err, report) {
@@ -141,7 +202,7 @@ suite.addBatch({
 
   'unused option': {
     topic: function () {
-      var file = path.join(__dirname, 'fixtures', 'unused.js');
+      var file = getFixture('unused.js');
       validate(file, {}, this.callback);
     },
     'should not error': function (err, report) {
