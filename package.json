@@ -1,7 +1,7 @@
 {
   "name": "grunt-jslint",
   "description": "Validates JavaScript files with JSLint",
-  "version": "1.1.3-pre",
+  "version": "1.1.4",
   "homepage": "https://github.com/stephenmathieson/grunt-jslint",
   "author": {
     "name": "Stephen Mathieson",
