@@ -5,11 +5,11 @@ var path = require('path'),
   assert = require('assert');
 
 var jslint = require('..'),
-    validate = jslint.validate,
-    suite = vows.describe('validate');
+  validate = jslint.validate,
+  suite = vows.describe('validate');
 
 function getFixture(file) {
-    return path.join(__dirname, 'fixtures', file);
+  return path.join(__dirname, 'fixtures', file);
 }
 
 // added for testing edition selection
@@ -97,7 +97,7 @@ suite.addBatch({
         assert.ifError(err);
       },
       'should be back to default(initial) edition': function (err, report) {
-          assert.equal(initialEdition, report);
+        assert.equal(initialEdition, report);
       }
     },
     'via runner': {
