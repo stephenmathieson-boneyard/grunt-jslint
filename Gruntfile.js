@@ -29,6 +29,7 @@ module.exports = function (grunt) {
           log: 'out/lint.log',
           errorsOnly: false,
           checkstyle: 'out/checkstyle.xml',
+          edition: 'latest',
           failOnError: true // default
         }
       },
