@@ -1,4 +1,15 @@
 
+1.1.6 / 2014-03-14
+==================
+
+ * Remove JSLint submodule
+ * Fix acceptance test runner
+ * Refactor makefile
+ * Add grunt-cli as a development dep
+ * Remove weird stuff from package.json
+ * Add missing release notes
+ * Use the algorithm JSHint uses for excludes instead of big-O(n^2) array element comparisons...
+
 1.1.5 / 2014-02-14
 ==================
 
