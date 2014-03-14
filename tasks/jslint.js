@@ -71,24 +71,28 @@ gruntJSLint.task = function (grunt, config, next) {
   }
 
   files = grunt.file.expand(files).filter(function (file) {
-    /* Shamelessly cribbed from https://github.com/jshint/jshint */
+    /* Shamelessly cribbed from JSHint.
+     *
+     * https://github.com/jshint/jshint/blob/2.x/src/cli.js
+     * l:219-234 */
     function isIgnored(fp, patterns) {
       return patterns.some(function (ip) {
         var filepath = path.resolve(fp);
-          if (minimatch(filepath, ip, {nocase: true })) {
-            return true;
-          }
-          if (filepath === ip) {
-            return true;
-          }
-
-          if (shjs.test("-d", fp) && ip.match(/^[^\/]*\/?$/) &&
-              fp.match(new RegExp("^" + ip + ".*"))) {
-            return true;
-          }
-        });
-      }
-      return !isIgnored(file, excludedFiles);
+        if (minimatch(filepath, ip, {nocase: true })) {
+          return true;
+        }
+        if (filepath === ip) {
+          return true;
+        }
+        /*jslint regexp: true */
+        if (shjs.test("-d", fp) && ip.match(/^[^\/]*\/?$/) &&
+            fp.match(new RegExp("^" + ip + ".*"))) {
+          return true;
+        }
+        /*jslint regexp: false */
+      });
+    }
+    return !isIgnored(file, excludedFiles);
   });
 
   options.directives = config.directives;
