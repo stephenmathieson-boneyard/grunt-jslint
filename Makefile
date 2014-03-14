@@ -1,29 +1,36 @@
 
+JSCOVERAGE ?= jscoverage
+BINS ?= ./node_modules/.bin
+VOWS_REPORTER ?= spec
+
+SRC = index.js
+SRC += $(wildcard lib/*.js)
+SRC += $(wildcard tasks/*.js)
+TESTS = $(wildcard test/*.js)
 ACCEPTANCE_TESTS := $(wildcard test/acceptance/*.js)
 
-test: test-acceptance
-	node_modules/.bin/vows \
-		test/*.js \
-		--spec
+test: node_modules test-acceptance
+	$(BINS)/vows --$(VOWS_REPORTER) $(TESTS)
 
-test-cov: lib-cov
-	JSLINT_COV=1 node_modules/.bin/vows \
-		test/*.js \
-		--cover-html
+node_modules: package.json
+	@npm install
 
 test-acceptance: $(ACCEPTANCE_TESTS)
-
 $(ACCEPTANCE_TESTS):
-	node $@
+	@node $@
 	@echo 'ok'
 
-lib-cov:
-	./node_modules/.bin/jscoverage lib lib-cov
-
 lint:
-	grunt jslint
+	@$(BINS)/grunt jslint
+
+coverage.html: lib-cov $(TESTS)
+	JSLINT_COV=1 VOWS_REPORTER=cover-html $(MAKE) test
+
+lib-cov: $(SRC)
+	@rm -rf $@
+	$(JSCOVERAGE) lib $@
 
 clean:
-	rm -rf lib-cov out
+	rm -rf lib-cov out coverage.html
 
-.PHONY: test lint test-cov clean $(ACCEPTANCE_TESTS) test-acceptance
+.PHONY: test lint clean
