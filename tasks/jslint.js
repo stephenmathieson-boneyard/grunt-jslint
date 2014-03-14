@@ -10,6 +10,9 @@
 
 var jslint = require('..');
 var pkg = require('../package.json');
+var path = require('path');
+var shjs = require('shelljs');
+var minimatch = require('minimatch');
 
 /**
  * Register the `jslint` task
@@ -66,13 +69,31 @@ gruntJSLint.task = function (grunt, config, next) {
   if (options.failOnError === undefined) {
     options.failOnError = true;
   }
-  excludedFiles = grunt.file.expand(excludedFiles);
 
-  files = grunt.file
-    .expand(files)
-    .filter(function (file) {
-      return excludedFiles.indexOf(file) === -1;
-    });
+  files = grunt.file.expand(files).filter(function (file) {
+    /* Shamelessly cribbed from JSHint.
+     *
+     * https://github.com/jshint/jshint/blob/2.x/src/cli.js
+     * l:219-234 */
+    function isIgnored(fp, patterns) {
+      return patterns.some(function (ip) {
+        var filepath = path.resolve(fp);
+        if (minimatch(filepath, ip, {nocase: true })) {
+          return true;
+        }
+        if (filepath === ip) {
+          return true;
+        }
+        /*jslint regexp: true */
+        if (shjs.test("-d", fp) && ip.match(/^[^\/]*\/?$/) &&
+            fp.match(new RegExp("^" + ip + ".*"))) {
+          return true;
+        }
+        /*jslint regexp: false */
+      });
+    }
+    return !isIgnored(file, excludedFiles);
+  });
 
   options.directives = config.directives;
 

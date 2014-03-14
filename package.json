@@ -24,7 +24,9 @@
     }
   ],
   "main": "index.js",
-  "bin": "bin/grunt-jslint",
+  "bin": {
+    "grunt-jslint": "bin/grunt-jslint"
+  },
   "engines": {
     "node": "*"
   },
@@ -32,7 +34,9 @@
     "test": "make test"
   },
   "dependencies": {
-    "jslint": ">=0.2.11"
+    "jslint": ">=0.2.11",
+    "shelljs": "~0.2.6",
+    "minimatch": "~0.2.14"
   },
   "devDependencies": {
     "grunt": "~0.4.1",
@@ -46,5 +50,9 @@
     "jslint",
     "lint",
     "code quality"
-  ]
+  ],
+  "readme": "# grunt-jslint\r\n\r\n[![Build Status](https://travis-ci.org/stephenmathieson/grunt-jslint.png?branch=master)](https://travis-ci.org/stephenmathieson/grunt-jslint) [![Dependency Status](https://gemnasium.com/stephenmathieson/grunt-jslint.png)](https://gemnasium.com/stephenmathieson/grunt-jslint)\r\n\r\nValidates JavaScript files with [JSLint] as a [grunt] task.\r\n\r\n## Installation\r\nInstall this grunt plugin next to your project's [Gruntfile][getting_started] with: `npm install grunt-jslint`\r\n\r\nThen add this line to your project's gruntfile:\r\n\r\n```javascript\r\ngrunt.loadNpmTasks('grunt-jslint');\r\n```\r\n\r\n## Documentation\r\n\r\nA multi-task to validate your JavaScript files with JSLint.\r\n\r\nSupports the following options:\r\n\r\n- **files** An array of files or [wildcards] which you want to be validated by JSLint\r\n- **exclude** An array of files or [wildcards] which you do *not* want to be validated by JSLint\r\n- **directives** Configuration options/settings to pre-define in JSLint.  Pre-defined globals are included within this object as `predef: ['myglobal']`\r\n- **options**\r\n    - **errorsOnly** A Boolean option which tells the plugin to only display errors when set to `true`\r\n    - **log** A String/filepath option which, when provided, tells the plugin where to write a verbose log to\r\n    - **junit** A String/filepath option which, when provided, tells the plugin where to write a JUnit-style XML file to\r\n    - **failOnError** A Boolean option - defaults to `true`; when set to `false`, grunt will not fail if JSLint detects an error\r\n    - **checkstyle** A String/filepath option which, when provided, tells the plugin where to write a CheckStyle-XML file to\r\n    - **shebang** Ignore shebang lines (`#!/usr/bin/whatever`) from files\r\n\r\n\r\n## Example Usage\r\n\r\n```javascript\r\nmodule.exports = function (grunt) {\r\n  'use strict';\r\n\r\n  grunt.loadNpmTasks('grunt-jslint'); // load the task\r\n\r\n  grunt.initConfig({\r\n    jslint: { // configure the task\r\n      // lint your project's server code\r\n      server: {\r\n        src: [ // some example files\r\n          'server/lib/*.js',\r\n          'server/routes/*.js',\r\n          'server/*.js',\r\n          'server/test/*.js'\r\n        ],\r\n        exclude: [\r\n          'server/config.js'\r\n        ],\r\n        directives: { // example directives\r\n          node: true,\r\n          todo: true\r\n        },\r\n        options: {\r\n          junit: 'out/server-junit.xml', // write the output to a JUnit XML\r\n          log: 'out/server-lint.log',\r\n          jslintXml: 'out/server-jslint.xml',\r\n          errorsOnly: true, // only display errors\r\n          failOnError: false, // defaults to true\r\n          checkstyle: 'out/server-checkstyle.xml' // write a checkstyle-XML\r\n        }\r\n      },\r\n      // lint your project's client code\r\n      client: {\r\n        src: [\r\n          'client/**/*.js'\r\n        ],\r\n        directives: {\r\n          browser: true,\r\n          predef: [\r\n            'jQuery'\r\n          ]\r\n        },\r\n        options: {\r\n          junit: 'out/client-junit.xml'\r\n        }\r\n      }\r\n    }\r\n  });\r\n\r\n  grunt.registerTask('default', 'jslint');\r\n};\r\n```\r\n\r\n## Contributing\r\n\r\nAll files should be validated with JSLint.  Bug fixes and/or new features must be accompanied by a passing test.  Tests are written with [vows](http://vowsjs.org/).\r\n\r\n### Validating coding style\r\n\r\nRun `grunt jslint` in the root of your repository.\r\n\r\n### Running the tests\r\n\r\nRun `make test` in the root of your repository.\r\n\r\n## License\r\nCopyright (c) 2013 Stephen Mathieson\r\nLicensed under the WTFPL license.\r\n\r\n[npm_registry_page]: http://search.npmjs.org/#/grunt-jslint\r\n[grunt]: http://gruntjs.com/\r\n[getting_started]: http://gruntjs.com/getting-started#the-gruntfile\r\n[wildcards]: http://gruntjs.com/configuring-tasks#files\r\n[JSLint]: https://github.com/douglascrockford/JSLint\r\n",
+  "readmeFilename": "Readme.md",
+  "_id": "grunt-jslint@1.1.5",
+  "_from": "grunt-jslint@^1.1.5"
 }
