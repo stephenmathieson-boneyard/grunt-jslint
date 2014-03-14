@@ -43,7 +43,8 @@
     "vows": "~0.7.0",
     "xml2js": "~0.2.8",
     "better-assert": "~1.0.0",
-    "jscoverage": "~0.3.8"
+    "jscoverage": "~0.3.8",
+    "grunt-cli": "~0.1.13"
   },
   "keywords": [
     "gruntplugin",
