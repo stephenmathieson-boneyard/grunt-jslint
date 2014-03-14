@@ -17,7 +17,7 @@ node_modules: package.json
 
 test-acceptance: $(ACCEPTANCE_TESTS)
 $(ACCEPTANCE_TESTS):
-	@node $@
+	node $@
 	@echo 'ok'
 
 lint:
@@ -33,4 +33,4 @@ lib-cov: $(SRC)
 clean:
 	rm -rf lib-cov out coverage.html
 
-.PHONY: test lint clean
+.PHONY: test lint clean test-acceptance $(ACCEPTANCE_TESTS)
