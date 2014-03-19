@@ -34,9 +34,7 @@
     "test": "make test"
   },
   "dependencies": {
-    "jslint": ">=0.2.11",
-    "shelljs": "~0.2.6",
-    "minimatch": "~0.2.14"
+    "jslint": ">=0.2.11"
   },
   "devDependencies": {
     "grunt": "~0.4.1",

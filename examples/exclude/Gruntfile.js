@@ -6,7 +6,11 @@ module.exports = function (grunt) {
     jslint: {
       all: {
         src: ['*.js'],
-        exclude: ['excludeme.js']
+        exclude: ['excludeme.js'],
+        directives: {
+          node: true,
+          indent: 2
+        }
       }
     }
   });

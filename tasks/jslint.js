@@ -70,30 +70,13 @@ gruntJSLint.task = function (grunt, config, next) {
     options.failOnError = true;
   }
 
-  files = grunt.file.expand(files).filter(function (file) {
-    /* Shamelessly cribbed from JSHint.
-     *
-     * https://github.com/jshint/jshint/blob/2.x/src/cli.js
-     * l:219-234 */
-    function isIgnored(fp, patterns) {
-      return patterns.some(function (ip) {
-        var filepath = path.resolve(fp);
-        if (minimatch(filepath, ip, {nocase: true })) {
-          return true;
-        }
-        if (filepath === ip) {
-          return true;
-        }
-        /*jslint regexp: true */
-        if (shjs.test("-d", fp) && ip.match(/^[^\/]*\/?$/) &&
-            fp.match(new RegExp("^" + ip + ".*"))) {
-          return true;
-        }
-        /*jslint regexp: false */
-      });
-    }
-    return !isIgnored(file, excludedFiles);
-  });
+  excludedFiles = grunt.file.expand(excludedFiles);
+
+  files = grunt.file
+    .expand(files)
+    .filter(function (file) {
+      return excludedFiles.indexOf(file) === -1;
+    });
 
   options.directives = config.directives;
 
