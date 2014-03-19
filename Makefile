@@ -9,11 +9,13 @@ SRC += $(wildcard tasks/*.js)
 TESTS = $(wildcard test/*.js)
 ACCEPTANCE_TESTS := $(wildcard test/acceptance/*.js)
 
-test: node_modules test-acceptance
-	$(BINS)/vows --$(VOWS_REPORTER) $(TESTS)
+test: node_modules test-unit test-acceptance
 
 node_modules: package.json
 	@npm install
+
+test-unit:
+	$(BINS)/vows --$(VOWS_REPORTER) $(TESTS)
 
 test-acceptance: $(ACCEPTANCE_TESTS)
 $(ACCEPTANCE_TESTS):
