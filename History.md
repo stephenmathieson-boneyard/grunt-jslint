@@ -1,3 +1,9 @@
+1.1.8 / 2104-03-19
+==================
+
+ * Makefile: factor unit tests
+ * exclude: factor, add tests, speed up exclude function
+
 
 1.1.7 / 2014-03-19
 ==================
@@ -90,7 +96,7 @@
 - Adding support for Grunt *0.4.x* by using [underscore's templating engine](http://underscorejs.org/#template), rather than Grunt's version of it
 - Updated JSLint to edition **2012-12-04**
 
-0.2.2-1 / 2012-12-04 
+0.2.2-1 / 2012-12-04
 ==================
 
 - Updating JSLint to "edition" **2012-11-17**
