@@ -46,6 +46,31 @@ var gruntJSLint = module.exports = function (grunt) {
 };
 
 /**
+ * Expand and exclude files
+ *
+ * @api private
+ * @param {Object} grunt
+ * @param {Array} files
+ * @param {Array} excludedFiles
+ */
+function expandAndExclude(grunt, files, excludedFiles) {
+
+  excludedFiles = grunt.file.expand(excludedFiles);
+
+  var exclude = {};
+  excludedFiles.forEach(function (e) { exclude[e] = true; });
+
+  files = grunt.file
+    .expand(files)
+    .filter(function (file) {
+      return !exclude[file];
+    });
+
+  return files;
+}
+gruntJSLint.expandAndExclude = expandAndExclude;
+
+/**
  * The actual jslint `task`
  *
  *
@@ -68,13 +93,7 @@ gruntJSLint.task = function (grunt, config, next) {
     options.failOnError = true;
   }
 
-  excludedFiles = grunt.file.expand(excludedFiles);
-
-  files = grunt.file
-    .expand(files)
-    .filter(function (file) {
-      return excludedFiles.indexOf(file) === -1;
-    });
+  files = expandAndExclude(grunt, files, excludedFiles);
 
   options.directives = config.directives;
 
