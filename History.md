@@ -1,4 +1,10 @@
 
+1.1.7 / 2014-03-19
+==================
+
+ * Revert #39 and fix #41.
+ * test: Add acceptance test for exclude
+
 1.1.6 / 2014-03-14
 ==================
 
