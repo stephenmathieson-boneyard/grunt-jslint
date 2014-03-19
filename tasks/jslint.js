@@ -11,8 +11,6 @@
 var jslint = require('..');
 var pkg = require('../package.json');
 var path = require('path');
-var shjs = require('shelljs');
-var minimatch = require('minimatch');
 
 /**
  * Register the `jslint` task

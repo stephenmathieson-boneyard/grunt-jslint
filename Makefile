@@ -17,7 +17,7 @@ node_modules: package.json
 
 test-acceptance: $(ACCEPTANCE_TESTS)
 $(ACCEPTANCE_TESTS):
-	node $@ --verbose
+	node $@
 	@echo 'ok'
 
 lint:
