@@ -136,7 +136,7 @@ gruntJSLint.task = function (grunt, config, next) {
     grunt.log.write(template);
 
     if (report.failures && options.failOnError) {
-      grunt.fail.fatal('jslint found ' + report.failures + 'failures', code, 3);
+      grunt.fail.fatal('jslint found ' + report.failures + ' violations', 3);
     } else {
       next(true);
     }
