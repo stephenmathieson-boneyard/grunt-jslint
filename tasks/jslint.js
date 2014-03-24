@@ -58,7 +58,9 @@ function expandAndExclude(grunt, files, excludedFiles) {
   excludedFiles = grunt.file.expand(excludedFiles);
 
   var exclude = {};
-  excludedFiles.forEach(function (e) { exclude[e] = true; });
+  excludedFiles.forEach(function (e) {
+    exclude[e] = true;
+  });
 
   files = grunt.file
     .expand(files)
@@ -134,7 +136,7 @@ gruntJSLint.task = function (grunt, config, next) {
     grunt.log.write(template);
 
     if (report.failures && options.failOnError) {
-      next(false);
+      grunt.fail.fatal('jslint found ' + report.failures + 'failures', code, 3);
     } else {
       next(true);
     }
