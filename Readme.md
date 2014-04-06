@@ -58,8 +58,7 @@ module.exports = function (grunt) {
           todo: true
         },
         options: {
-          edition: 'latest', // specify an edition of jslint
-          lintPath: 'lib/mycustom-jslint.js', // specify own jslint file to use
+          edition: 'latest', // specify an edition of jslint or use 'dir/mycustom-jslint.js' for own path
           junit: 'out/server-junit.xml', // write the output to a JUnit XML
           log: 'out/server-lint.log',
           jslintXml: 'out/server-jslint.xml',
