@@ -30,6 +30,7 @@ Supports the following options:
     - **failOnError** A Boolean option - defaults to `true`; when set to `false`, grunt will not fail if JSLint detects an error
     - **checkstyle** A String/filepath option which, when provided, tells the plugin where to write a CheckStyle-XML file to
     - **shebang** Ignore shebang lines (`#!/usr/bin/whatever`) from files
+    - **edition** Specify edition of jslint to use.  Either a date which is a JSLint edition (see node_modules/jslint/lib for valid choices), or 'latest' for the latest version, or a path (absolute *or* relative to process current directory) to the JSLint
 
 
 ## Example Usage
