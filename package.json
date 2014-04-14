@@ -34,7 +34,7 @@
     "test": "make test"
   },
   "dependencies": {
-    "jslint": ">=0.2.11"
+    "jslint": ">=0.3.3"
   },
   "devDependencies": {
     "grunt": "~0.4.1",
