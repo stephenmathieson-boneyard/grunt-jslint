@@ -105,6 +105,31 @@ suite.addBatch({
       assert.lengthOf(report, 0);
     }
   }
+}).addBatch({
+  'load specific path': {
+    topic: function () {
+      var file = getFixture('es5.js'),
+        opts = {
+          directives: {
+            es5: true
+          }
+        };
+
+      jslint.loadJSLintFromPath('node_modules/jslint/lib/jslint-2013-08-26.js', function () {
+        validate(file, opts, this.callback);
+      }.bind(this));
+
+    },
+    'should not error': function (err, report) {
+      assert.ifError(err);
+    },
+    'should be a correct edition': function (err, report) {
+      assert.ok(jslint.edition === '2013-08-26');
+    },
+    'should have no violations': function (err, report) {
+      assert.lengthOf(report, 0);
+    }
+  }
 });
 
 suite.export(module);
