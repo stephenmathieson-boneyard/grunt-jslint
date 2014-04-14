@@ -1,7 +1,9 @@
 1.1.9 / 2014-04-13
 ==================
 
- *
+ * Readme.md: document new feature, specify edition of jslint by path
+ * lib/jslint.js: new function loadJSLintFromPath
+ * test/editions.js: add unit test for loadJSLintFromPath
 
 1.1.8 / 2014-03-19
 ==================
