@@ -15,7 +15,6 @@ module.exports = function (grunt) {
           unused: true,
           todo: true,
           indent: 2,
-          nomen: true,
           vars: true,
           node: true,
           stupid: true,
