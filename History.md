@@ -1,3 +1,9 @@
+1.1.10 / 2014-05-05
+===================
+
+ * lib/jslint.js: remove BOM when present
+ * test/jslint.js: unit tests for new fn preprocessScript
+
 1.1.9 / 2014-04-13
 ==================
 
