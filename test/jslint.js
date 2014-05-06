@@ -200,6 +200,27 @@ suite.addBatch({
     }
   },
 
+  'preprocessScript strip shebang': {
+    topic: function () {
+      var source = jslint.preprocessScript('\ufeff#!/usr/bin/env node\nvar x = 1;', true);
+      this.callback(null, source);
+    },
+    'should strip bom and shebang but not newline': function (err, report) {
+      assert.ifError(err);
+      assert(report === '\nvar x = 1;');
+    }
+  },
+  'preprocessScript no strip shebang': {
+    topic: function () {
+      var source = jslint.preprocessScript('\ufeff#!/usr/bin/env node\nvar x = 1;', false);
+      this.callback(null, source);
+    },
+    'should strip bom': function (err, report) {
+      assert.ifError(err);
+      assert(report === '#!/usr/bin/env node\nvar x = 1;');
+    }
+  },
+
   'unused option': {
     topic: function () {
       var file = getFixture('unused.js');
