@@ -100,6 +100,17 @@ suite.addBatch({
         assert.equal(initialEdition, report);
       }
     },
+    'with explicit path': {
+      topic: function () {
+        jslint.loadJSLintFromPath('./node_modules/jslint/lib/jslint-latest.js', this.callback);
+      },
+      'should not error': function (err, report) {
+        assert.ifError(err);
+      },
+      'should be latest edition': function (err, report) {
+        assert.equal(initialEdition, report);
+      }
+    },
     'via runner': {
       topic: function () {
         var file = getFixture('clean.js');
