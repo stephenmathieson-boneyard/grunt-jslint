@@ -1,3 +1,9 @@
+1.1.11 / 2014-05-08
+===================
+
+ * lib/jslint.js: fix Issue #47 (variable aliasing)
+ * test/jslint.js: unit test to expose issue
+
 1.1.10 / 2014-05-05
 ===================
 
