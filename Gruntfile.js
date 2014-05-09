@@ -44,7 +44,8 @@ module.exports = function (grunt) {
           indent: 2,
           node: true,
           nomen: true,
-          todo: true
+          todo: true,
+          vars: true
         }
       }
     }

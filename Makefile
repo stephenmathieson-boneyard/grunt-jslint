@@ -1,4 +1,8 @@
 
+ifeq ($(OS),Windows_NT)
+	SHELL = C:/Windows/System32/cmd.exe
+endif
+
 JSCOVERAGE ?= jscoverage
 BINS ?= ./node_modules/.bin
 VOWS_REPORTER ?= spec
@@ -7,7 +11,8 @@ SRC = index.js
 SRC += $(wildcard lib/*.js)
 SRC += $(wildcard tasks/*.js)
 TESTS = $(wildcard test/*.js)
-ACCEPTANCE_TESTS := $(wildcard test/acceptance/*.js)
+EXAMPLES = $(wildcard examples/*)
+ACCEPTANCE_TESTS = $(addprefix test/acceptance/, $(notdir $(EXAMPLES)))
 
 test: node_modules test-unit test-acceptance
 
@@ -15,12 +20,12 @@ node_modules: package.json
 	@npm install
 
 test-unit:
-	$(BINS)/vows --$(VOWS_REPORTER) $(TESTS)
+	"$(BINS)/vows" --$(VOWS_REPORTER) $(TESTS)
 
 test-acceptance: $(ACCEPTANCE_TESTS)
 $(ACCEPTANCE_TESTS):
 	node $@
-	@echo 'ok'
+	@echo ok
 
 lint:
 	@$(BINS)/grunt jslint

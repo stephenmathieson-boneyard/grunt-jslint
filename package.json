@@ -42,7 +42,9 @@
     "xml2js": "~0.2.8",
     "better-assert": "~1.0.0",
     "jscoverage": "~0.3.8",
-    "grunt-cli": "~0.1.13"
+    "grunt-cli": "~0.1.13",
+    "win-spawn": "~2.0.0",
+    "which": "~1.0.5"
   },
   "keywords": [
     "gruntplugin",
