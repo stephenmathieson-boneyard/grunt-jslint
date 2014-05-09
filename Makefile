@@ -1,8 +1,3 @@
-
-ifeq ($(OS),Windows_NT)
-	SHELL = C:/Windows/System32/cmd.exe
-endif
-
 JSCOVERAGE ?= jscoverage
 BINS ?= ./node_modules/.bin
 VOWS_REPORTER ?= spec
