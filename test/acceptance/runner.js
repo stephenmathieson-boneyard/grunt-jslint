@@ -53,14 +53,12 @@ module.exports = function runner(opts) {
   child.on('close', function (code) {
     if (opts.message) {
       assert(-1 !== out.indexOf(opts.message));
+    } else if (opts.errors) {
+      assert(0 !== code);
+      assert(-1 !== out.indexOf('JSLint failed, ' + opts.errors + ' violations'));
     } else {
-      if (opts.errors) {
-        assert(0 !== code);
-        assert(-1 !== out.indexOf('JSLint failed, ' + opts.errors + ' violations'));
-      } else {
-        assert(0 === code);
-        assert(-1 !== out.indexOf('Done, without errors.'));
-      }
+      assert(0 === code);
+      assert(-1 !== out.indexOf('Done, without errors.'));
     }
   });
 
