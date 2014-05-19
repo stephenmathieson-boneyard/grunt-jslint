@@ -102,7 +102,7 @@ suite.addBatch({
     },
     'with explicit path': {
       topic: function () {
-        jslint.loadJSLintFromPath('./node_modules/jslint/lib/jslint-latest.js', this.callback);
+        jslint.loadJSLint('./node_modules/jslint/lib/jslint-latest.js', this.callback);
       },
       'should not error': function (err, report) {
         assert.ifError(err);
