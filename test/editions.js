@@ -115,7 +115,7 @@ suite.addBatch({
           }
         };
 
-      jslint.loadJSLintFromPath('node_modules/jslint/lib/jslint-2013-08-26.js', function () {
+      jslint.loadJSLint('node_modules/jslint/lib/jslint-2013-08-26.js', function () {
         validate(file, opts, this.callback);
       }.bind(this));
 
