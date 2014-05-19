@@ -1,3 +1,11 @@
+1.1.12 / 2014-05-19
+===================
+
+ * package.json: require newer jslint module (>0.5.0)
+ * lib/jslint.js: delegate jslint file loading to jslint
+ * test/editions.js: use loadJSLint instead of ..fromPath
+ * test/jslin.js: use loadJSLint instead of ..fromPath
+
 1.1.11 / 2014-05-08
 ===================
 
