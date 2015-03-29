@@ -37,14 +37,14 @@
     "jslint": "~0.8.1"
   },
   "devDependencies": {
-    "grunt": "~0.4.1",
-    "vows": "~0.7.0",
-    "xml2js": "~0.4.6",
     "better-assert": "~1.0.0",
-    "jscoverage": "~0.3.8",
+    "grunt": "~0.4.1",
     "grunt-cli": "~0.1.13",
+    "jscoverage": "~0.3.8",
+    "vows": "~0.8.1",
+    "which": "~1.0.5",
     "win-spawn": "~2.0.0",
-    "which": "~1.0.5"
+    "xml2js": "~0.4.6"
   },
   "keywords": [
     "gruntplugin",
