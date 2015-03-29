@@ -55,7 +55,9 @@ var gruntJSLint = module.exports = function (grunt) {
  */
 function expandAndExclude(grunt, files, excludedFiles) {
 
-  excludedFiles = grunt.file.expand(excludedFiles);
+  excludedFiles = excludedFiles.map(function (p) {
+      return grunt.file.expand(p);
+  }).reduce(function (a, b) { return a.concat(b); }, []);
 
   var exclude = {};
   excludedFiles.forEach(function (e) { exclude[e] = true; });

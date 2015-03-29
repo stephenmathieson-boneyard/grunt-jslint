@@ -105,6 +105,44 @@ suite.addBatch({
     }
   },
 
+  'exclude works with globs and subdirs (4)': {
+    topic: function () {
+        var files = ['js/**/*.js'],
+            excludedFiles = [
+                    'js/jsDocs/**/*.js',
+                    'js/lib/**/*.js',
+                    'js/scripts.min.js'
+            ],
+            mockGrunt = makeMockGrunt();
+
+        mockGrunt.overrides = {
+            'js/**/*.js': [
+                'js/0.js',
+                'js/1/2.js',
+                'js/jsDocs/3.js',
+                'js/jsDocs/4/5.js',
+                'js/lib/6.js',
+                'js/lib/7/8.js'
+            ],
+            'js/jsDocs/**/*.js': [
+                'js/jsDocs/3.js',
+                'js/jsDocs/4/5.js'
+            ],
+            'js/lib/**/*.js': [
+                'js/lib/6.js',
+                'js/lib/7/8.js'
+            ]
+        };
+
+        files = jslint.expandAndExclude(mockGrunt, files, excludedFiles);
+        this.callback(null, files)
+    },
+    'should exclude files after expansion': function (err, files) {
+        assert.deepEqual(files, ['js/0.js', 'js/1/2.js']);
+    }
+  },
+
+
   'exclude is not dog slow': {
     topic: function () {
       var files = [],
@@ -132,12 +170,12 @@ suite.addBatch({
       this.callback(null, files, includedFiles, t);
     },
 
-    'should excluded files without taking forever': function (err, files, includedFiles) {
+    'should exclude files without taking forever': function (err, files, includedFiles) {
       assert.deepEqual(includedFiles, files);
     },
     'should have short duration': function (err, files, includedFiles, t) {
       var microseconds = 1.0e6 * t[0] + t[1] / 1000;
-      assert.ok(microseconds < 2000);
+      assert.ok(microseconds < 20000);
     }
   }
 });
