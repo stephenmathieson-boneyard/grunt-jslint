@@ -135,10 +135,53 @@ suite.addBatch({
         };
 
         files = jslint.expandAndExclude(mockGrunt, files, excludedFiles);
-        this.callback(null, files)
+        this.callback(null, files);
     },
     'should exclude files after expansion': function (err, files) {
         assert.deepEqual(files, ['js/0.js', 'js/1/2.js']);
+    }
+  },
+
+  'exclude works with globs and subdirs (5)': {
+    topic: function () {
+        var files = ['js/**/*.js'],
+            excludedFiles = [
+                    'js/jsDocs/**/*.js',
+                    'js/lib/**/*.js',
+                    'js/scripts.min.js'
+            ],
+            mockGrunt = makeMockGrunt();
+
+        mockGrunt.overrides = {
+            'js/**/*.js': [
+                'js/scripts.js',
+                'js/scripts.min.js',
+                'js/jsDocs/scripts/URI.js',
+                'js/jsDocs/scripts/bootstrap-dropdown.js',
+                'js/jsDocs/scripts/bootstrap-tab.js',
+                'js/jsDocs/scripts/docstrap.lib.js',
+                'js/jsDocs/scripts/sunlight.js',
+                'js/jsDocs/scripts/toc.js',
+                'js/lib/jquery.min.js'
+            ],
+            'js/jsDocs/**/*.js': [
+                'js/jsDocs/scripts/URI.js',
+                'js/jsDocs/scripts/bootstrap-dropdown.js',
+                'js/jsDocs/scripts/bootstrap-tab.js',
+                'js/jsDocs/scripts/docstrap.lib.js',
+                'js/jsDocs/scripts/sunlight.js',
+                'js/jsDocs/scripts/toc.js',
+            ],
+            'js/lib/**/*.js': [
+                'js/lib/jquery.min.js'
+            ]
+        };
+
+        files = jslint.expandAndExclude(mockGrunt, files, excludedFiles);
+        this.callback(null, files);
+    },
+    'should exclude files after expansion': function (err, files) {
+        assert.deepEqual(files, ['js/scripts.js']);
     }
   },
 
