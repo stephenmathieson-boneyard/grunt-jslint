@@ -115,10 +115,7 @@ suite.addBatch({
         var parser = new Parser(),
           callback = this.callback;
 
-        // NOTE: sloppy.js has no errors now I've added "use strict". This
-        // satisfies a later test but fails this one. There are no errors so
-        // there are no <error/> tags. Removing the test -- Skateside.
-        runner([ /*path('sloppy.js'),*/ path('white.js'), path('var.js') ], {}, function (err, report) {
+        runner([ path('sloppy.js'), path('white.js'), path('var.js') ], {}, function (err, report) {
           assert.ifError(err);
           parser.parseString(reports.checkstyle(report), callback);
         });
@@ -129,8 +126,8 @@ suite.addBatch({
       'should use the "checkstyle" namespace': function (err, xml) {
         assert.ok(xml.checkstyle);
       },
-      'should contain two file nodes': function (err, xml) {
-        assert.lengthOf(xml.checkstyle.file, 2);
+      'should contain three file nodes': function (err, xml) {
+        assert.lengthOf(xml.checkstyle.file, 3);
       },
       'should contain an error node for each file': function (err, xml) {
         xml.checkstyle.file.forEach(function (file) {
@@ -158,8 +155,7 @@ suite.addBatch({
         var parser = new Parser(),
           callback = this.callback;
 
-        // NOTE: Again, no issues yields no <issue/> tags -- Skateside
-        runner([ /*path('sloppy.js'),*/ path('white.js'), path('var.js') ], {}, function (err, report) {
+        runner([ path('sloppy.js'), path('white.js'), path('var.js') ], {}, function (err, report) {
           assert.ifError(err);
           parser.parseString(reports.jslint(report), callback);
         });
@@ -170,8 +166,8 @@ suite.addBatch({
       'should use the "jslint" namespace': function (err, xml) {
         assert.ok(xml.jslint);
       },
-      'should contain two file nodes': function (err, xml) {
-        assert.lengthOf(xml.jslint.file, 2);
+      'should contain three file nodes': function (err, xml) {
+        assert.lengthOf(xml.jslint.file, 3);
       },
       'should contain an issue node for each file': function (err, xml) {
         xml.jslint.file.forEach(function (file) {
@@ -196,8 +192,7 @@ suite.addBatch({
         var parser = new Parser(),
           callback = this.callback;
 
-        // NOTE: nothing failed so no <failure/> tags -- Skateside
-        runner([ /*path('sloppy.js'),*/ path('white.js'), path('var.js') ], {}, function (err, report) {
+        runner([ path('sloppy.js'), path('white.js'), path('var.js') ], {}, function (err, report) {
           assert.ifError(err);
           parser.parseString(reports.junit(report), callback);
         });

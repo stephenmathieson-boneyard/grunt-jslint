@@ -1,7 +1,7 @@
 var thing=true;
 var stuff=false;
 var f=function(){
-    'use strict';
+    "use strict";
 
     if(thing){
         return stuff;

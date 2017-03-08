@@ -177,8 +177,9 @@ suite.addBatch({
         assert.isArray(report);
         assert.lengthOf(report, 0);
       }
-    },
-    'sloppy': {
+    }
+    // NOTE: JSLint removed the ability to make "use strict" optional -- Skateside
+    /*'sloppy': {
       topic: function () {
         var file = getFixture('sloppy.js');
         validate(file, {
@@ -194,7 +195,7 @@ suite.addBatch({
         assert.isArray(report);
         assert.lengthOf(report, 0);
       }
-    }
+    }*/
   },
 
   'shebang option': {
