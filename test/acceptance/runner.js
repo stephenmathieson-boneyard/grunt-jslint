@@ -15,14 +15,14 @@ var EXAMPLES_DIR = path.join(__dirname, '..', '..', 'examples');
  * Examples
  *
  *    var runner = require('./acceptance-runner');
- *    
+ *
  *    // a passing test
  *    var test = {
  *      example: 'all',
  *      errors: 0
  *    };
  *    runner(test);
- *    
+ *
  *    // a failing test with a custom grunt task
  *    var test = {
  *      example: 'custom-edition',
@@ -37,7 +37,7 @@ var EXAMPLES_DIR = path.join(__dirname, '..', '..', 'examples');
  *      message: 'grunt-jslint\'s interface has changed since 0.2.x'
  *    };
  *    runner(test);
- *    
+ *
  *
  * @api public
  * @param {Object} opts
