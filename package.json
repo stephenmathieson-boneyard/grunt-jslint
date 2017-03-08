@@ -34,7 +34,7 @@
     "test": "make test"
   },
   "dependencies": {
-    "jslint": "~0.8.1"
+    "jslint": "^0.10.3"
   },
   "devDependencies": {
     "better-assert": "~1.0.0",

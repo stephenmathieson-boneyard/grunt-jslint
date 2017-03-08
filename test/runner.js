@@ -15,12 +15,12 @@ var suite = vows.describe('runner');
  * @param  {Object} issue
  */
 function validateIssue(issue) {
-  assert.ok(issue.id);
-  assert.ok(issue.raw);
-  assert.ok(issue.evidence);
-  assert.ok(issue.line);
-  assert.ok(issue.character);
-  assert.ok(issue.reason);
+  assert.ok(issue.name);//assert.ok(issue.id);
+    //assert.ok(issue.raw);
+    //assert.ok(issue.evidence);
+  assert.ok(typeof issue.line === "number");
+  assert.ok(issue.column);//assert.ok(issue.character);
+  assert.ok(issue.message);//assert.ok(issue.reason);
   assert.ok(issue.file);
 }
 
@@ -98,7 +98,7 @@ function createBatch(title, topic) {
 
 suite.addBatch(createBatch('multiple files', function () {
   var files = [
-      path.join(__dirname, 'fixtures', 'sloppy.js'),
+      path.join(__dirname, 'fixtures', 'globals.js'), // was sloppy.js -- Skateside
       path.join(__dirname, 'fixtures', 'white.js')
     ],
     directives = {};
@@ -108,7 +108,7 @@ suite.addBatch(createBatch('multiple files', function () {
 
 suite.addBatch(createBatch('single file', function () {
   var files = [
-      path.join(__dirname, 'fixtures', 'sloppy.js')
+      path.join(__dirname, 'fixtures', 'globals.js') // was sloppy.js -- Skateside
     ],
     directives = {};
 
@@ -117,7 +117,7 @@ suite.addBatch(createBatch('single file', function () {
 
 suite.addBatch(createBatch('multiple directives', function () {
   var files = [
-      path.join(__dirname, 'fixtures', 'sloppy.js'),
+      path.join(__dirname, 'fixtures', 'globals.js'), // was sloppy.js -- Skateside
       path.join(__dirname, 'fixtures', 'white.js')
     ],
     directives = {
@@ -132,7 +132,7 @@ suite.addBatch(createBatch('multiple directives', function () {
 
 suite.addBatch(createBatch('single directive', function () {
   var files = [
-      path.join(__dirname, 'fixtures', 'sloppy.js'),
+      path.join(__dirname, 'fixtures', 'globals.js'), // was sloppy.js -- Skateside
       path.join(__dirname, 'fixtures', 'white.js')
     ],
     directives = {

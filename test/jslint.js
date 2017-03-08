@@ -60,7 +60,7 @@ suite.addBatch({
       'should pass a global violation': function (err, report) {
         var violation = report[0];
 
-        assert.equal(violation.reason, '\'someglobal\' was used before it was defined.');
+        assert.equal(violation.message, 'Undeclared \'someglobal\'.');
       }
     }
   },
@@ -143,13 +143,13 @@ suite.addBatch({
     },
     'should contain required issue properties': function (err, report) {
       report.forEach(function (issue) {
-        assert.ok(issue.id);
-        assert.ok(issue.raw);
-        assert.ok(issue.evidence);
-        assert.ok(issue.line);
-        assert.ok(issue.character);
-        assert.ok(issue.reason);
-        assert.ok(issue.file);
+          assert.ok(issue.name);//assert.ok(issue.id);
+          //assert.ok(issue.raw);
+          //assert.ok(issue.evidence);
+          assert.ok(typeof issue.line === "number");
+          assert.ok(issue.column);//assert.ok(issue.character);
+          assert.ok(issue.message);//assert.ok(issue.reason);
+          assert.ok(issue.file);
       });
     },
     'should report at least 9 issues': function (err, report) {
@@ -244,10 +244,10 @@ suite.addBatch({
       assert(report.length >= 2);
     },
     'should report on unused parameters': function (err, report) {
-      assert.equal(report[0].reason, 'Unused \'c\'.');
+      assert.equal(report[0].message, 'Unused \'c\'.');
     },
     'should report on unused vars': function (err, report) {
-      assert.equal(report[1].reason, 'Unused \'b\'.');
+      assert.equal(report[1].message, 'Unused \'b\'.');
     }
   },
 
