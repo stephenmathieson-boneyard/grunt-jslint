@@ -15,12 +15,12 @@ var suite = vows.describe('runner');
  * @param  {Object} issue
  */
 function validateIssue(issue) {
-  assert.ok(issue.id);
-  assert.ok(issue.raw);
-  assert.ok(issue.evidence);
-  assert.ok(issue.line);
-  assert.ok(issue.character);
-  assert.ok(issue.reason);
+  assert.ok(issue.name);//assert.ok(issue.id);
+    //assert.ok(issue.raw);
+    //assert.ok(issue.evidence);
+  assert.ok(typeof issue.line === "number");
+  assert.ok(issue.column);//assert.ok(issue.character);
+  assert.ok(issue.message);//assert.ok(issue.reason);
   assert.ok(issue.file);
 }
 

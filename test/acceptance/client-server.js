@@ -8,5 +8,5 @@ require('./runner')({
 require('./runner')({
   example: 'client-server',
   task: 'jslint:server',
-  errors: 4
+  errors: 3
 });

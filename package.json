@@ -34,14 +34,14 @@
     "test": "make test"
   },
   "dependencies": {
-    "jslint": "~0.8.1"
+    "jslint": "^0.10.3"
   },
   "devDependencies": {
     "better-assert": "~1.0.0",
     "grunt": "~0.4.1",
     "grunt-cli": "~0.1.13",
     "jscoverage": "~0.5.9",
-    "vows": "~0.8.1",
+    "vows": "~0.9.0-rc3",
     "which": "~1.0.5",
     "win-spawn": "~2.0.0",
     "xml2js": "~0.4.6"

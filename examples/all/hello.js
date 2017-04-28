@@ -1,9 +1,11 @@
 
 exports.hello = function (name) {
-    'use strict';
+    "use strict";
 
-    name = name ? ' ' + name : '';
-    process.stdout.write('hello' + name);
+    name = name
+        ? " " + name
+        : "";
+    process.stdout.write("hello" + name);
 };
 
-exports.hello('world');
+exports.hello("world");

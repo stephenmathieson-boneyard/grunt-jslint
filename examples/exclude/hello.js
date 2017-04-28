@@ -1,6 +1,7 @@
+(function () {
 
-function hello() {
-  'use strict';
+    "use strict";
 
-  return 'hello';
-}
+    return "hello";
+
+}());
