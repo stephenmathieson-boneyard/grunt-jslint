@@ -38,7 +38,7 @@
   },
   "devDependencies": {
     "better-assert": "~1.0.0",
-    "grunt": "~0.4.1",
+    "grunt": "~1.5.3",
     "grunt-cli": "~0.1.13",
     "jscoverage": "~0.5.9",
     "vows": "~0.9.0-rc3",
