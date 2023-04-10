@@ -44,7 +44,7 @@
     "vows": "~0.9.0-rc3",
     "which": "~1.2.14",
     "win-spawn": "~2.0.0",
-    "xml2js": "~0.4.6"
+    "xml2js": "~0.5.0"
   },
   "keywords": [
     "gruntplugin",
