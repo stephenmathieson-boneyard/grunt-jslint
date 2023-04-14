@@ -40,7 +40,7 @@
     "better-assert": "~1.0.0",
     "grunt": "~0.4.1",
     "grunt-cli": "~0.1.13",
-    "jscoverage": "~0.5.9",
+    "jscoverage": "~0.6.0",
     "vows": "~0.9.0-rc3",
     "which": "~1.2.14",
     "win-spawn": "~2.0.0",
